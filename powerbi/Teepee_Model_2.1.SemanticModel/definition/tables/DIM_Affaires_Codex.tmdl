@@ -1,0 +1,186 @@
+table DIM_Affaires_Codex
+	lineageTag: 2b02331b-67f6-44d4-9d49-d8e92350bbde
+
+	column TEEPEE_AffairesCodex_ID
+		dataType: string
+		lineageTag: 8cd689c8-f7cc-46a0-a6fb-084998f446f7
+		summarizeBy: none
+		sourceColumn: TEEPEE_AffairesCodex_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROJECT_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 59ac5ca6-0e07-4084-a6d3-6e4b671b5e91
+		summarizeBy: count
+		sourceColumn: PROJECT_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NUMÉRO D''AFFAIRE'
+		dataType: string
+		lineageTag: 5b30d587-f3df-4df4-a104-8a009d8b567f
+		summarizeBy: none
+		sourceColumn: NUMÉRO D'AFFAIRE
+
+		annotation SummarizationSetBy = Automatic
+
+	column POSITION
+		dataType: string
+		lineageTag: 471fcd44-9f8a-4ab9-99a4-712d6f05b9f2
+		summarizeBy: none
+		sourceColumn: POSITION
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROJECT_TYPE
+		dataType: string
+		lineageTag: d280d64c-9bd1-4424-b79c-4e9ab41e7c42
+		summarizeBy: none
+		sourceColumn: PROJECT_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column RECORD_CREATION_DT
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 73192fd8-0165-439d-98ce-599691fc5307
+		summarizeBy: none
+		sourceColumn: RECORD_CREATION_DT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WBS_BASIC_START_DT
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3760d222-bbc4-49db-8122-eb586cf5bbed
+		summarizeBy: none
+		sourceColumn: WBS_BASIC_START_DT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column WBS_BASIC_END_DT
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 29dab070-0ece-4652-a64c-d4aa74ce978b
+		summarizeBy: none
+		sourceColumn: WBS_BASIC_END_DT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column SEGMENT_BUS_AXIS
+		dataType: string
+		lineageTag: 40cab842-8bda-45ec-8f9e-86af36e4902d
+		summarizeBy: none
+		sourceColumn: SEGMENT_BUS_AXIS
+
+		annotation SummarizationSetBy = Automatic
+
+	column SEGMENT_BUS_PROC_AXIS
+		dataType: string
+		lineageTag: 8031e4bb-422f-4cc2-8cdf-81b55ee5b505
+		summarizeBy: none
+		sourceColumn: SEGMENT_BUS_PROC_AXIS
+
+		annotation SummarizationSetBy = Automatic
+
+	column OBJECT_NUM
+		dataType: string
+		lineageTag: 4154f61d-4ff7-445d-8330-3e15fda4babf
+		summarizeBy: none
+		sourceColumn: OBJECT_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROJECT_DESC
+		dataType: string
+		lineageTag: 5ccad2af-0b8e-40de-9c54-c9e833ad2099
+		summarizeBy: none
+		sourceColumn: PROJECT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column OSMOSE_CD
+		dataType: int64
+		formatString: 0
+		lineageTag: b6de866e-2066-4f46-b781-dae4026cec65
+		summarizeBy: sum
+		sourceColumn: OSMOSE_CD
+
+		annotation SummarizationSetBy = Automatic
+
+	column PROJECT_SHORT_DESC
+		dataType: string
+		lineageTag: e98c3308-4aa4-4a1f-8ebf-520dd541e039
+		summarizeBy: none
+		sourceColumn: PROJECT_SHORT_DESC
+
+		annotation SummarizationSetBy = Automatic
+
+	column ANALYTICAL_UNIT
+		dataType: int64
+		formatString: 0
+		lineageTag: 4bf08bfd-5782-43fe-89b1-9e706e397edd
+		summarizeBy: sum
+		sourceColumn: ANALYTICAL_UNIT
+
+		annotation SummarizationSetBy = Automatic
+
+	column USER_NAME
+		dataType: string
+		lineageTag: 922def05-6cef-4ade-9620-8a962a1f25c6
+		summarizeBy: none
+		sourceColumn: USER_NAME
+
+		annotation SummarizationSetBy = Automatic
+
+	column QUOTE_PRICE
+		dataType: string
+		lineageTag: 7b3ff965-64c5-428a-8b98-6786155e132a
+		summarizeBy: none
+		sourceColumn: QUOTE_PRICE
+
+		annotation SummarizationSetBy = Automatic
+
+	column CreationDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 8efcfd30-6ad5-4cf0-a74d-c92e296d0109
+		summarizeBy: none
+		sourceColumn: CreationDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column UpdatedDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a0016137-0b17-46c0-bd79-b9c6aa22a5bd
+		summarizeBy: none
+		sourceColumn: UpdatedDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition DIM_Affaires_Codex = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\DIM'
+		source =
+				let
+				    Source = TAB_Affaires_Codex_TSF
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

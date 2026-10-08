@@ -1,0 +1,73 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.5.0/schema.json",
+  "position": {
+    "x": 0,
+    "y": 603,
+    "z": 3000,
+    "height": 313,
+    "width": 324,
+    "tabOrder": 3000
+  },
+  "objects": {
+    "columnWidth": [
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "72.45614464025877D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Pointage.Affaire"
+        }
+      },
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "105.69211840155273D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Pointage.Pointage_ID"
+        }
+      },
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "81D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Pointage.Utilisateur"
+        }
+      },
+      {
+        "properties": {
+          "value": {
+            "expr": {
+              "Literal": {
+                "Value": "294.1307429528175D"
+              }
+            }
+          }
+        },
+        "selector": {
+          "metadata": "Pointage.Justification des travaux realises"
+        }
+      }
+    ],
+    "values": [],
+    "columnHeaders": []
+  }
+}

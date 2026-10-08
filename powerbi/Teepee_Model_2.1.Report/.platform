@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Teepee_Model_2.1"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a2b172d1-3a25-45d1-9b61-945b1c78cfd6"
+  }
+}

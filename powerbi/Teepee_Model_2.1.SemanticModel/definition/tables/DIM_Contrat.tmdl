@@ -1,0 +1,161 @@
+table DIM_Contrat
+	lineageTag: 03534a7a-add4-4a5f-8524-9b327788bc23
+
+	column Contrats_ID
+		dataType: string
+		lineageTag: 6a2664a9-3d24-4504-aa58-bd51183a1892
+		summarizeBy: none
+		sourceColumn: Contrats_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Référence Contrat'
+		dataType: string
+		lineageTag: cfab6cb6-3899-4845-811a-95694eb2467c
+		summarizeBy: none
+		sourceColumn: Référence Contrat
+
+		annotation SummarizationSetBy = Automatic
+
+	column Numéro
+		dataType: int64
+		formatString: 0
+		lineageTag: f60a4e1a-1323-4a87-a72a-5261a26cc5b2
+		summarizeBy: none
+		sourceColumn: Numéro
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commentaires
+		dataType: string
+		lineageTag: 2a4b5d96-ac3b-4e19-b121-d988b9d3f086
+		summarizeBy: none
+		sourceColumn: Commentaires
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de prise d''effet'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 907dc74c-db8f-445c-9cca-d081c8e46704
+		summarizeBy: none
+		sourceColumn: Date de prise d'effet
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Durée
+		dataType: int64
+		formatString: 0
+		lineageTag: 25b7f973-8c3f-437b-9dde-6911da1de0e2
+		summarizeBy: none
+		sourceColumn: Durée
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nbr en jours (si autre)'
+		dataType: int64
+		formatString: 0
+		lineageTag: dfc80d1b-9289-4d70-aa19-4825e660e4bb
+		summarizeBy: none
+		sourceColumn: Nbr en jours (si autre)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de préavis'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 98851ff0-0821-4df0-b73f-0c64bcd72686
+		summarizeBy: none
+		sourceColumn: Date de préavis
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Date fin de contrat'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: df22671e-06b5-47d6-9d74-74ae1a6d2f77
+		summarizeBy: none
+		sourceColumn: Date fin de contrat
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Statut
+		dataType: string
+		lineageTag: 90d1591a-01aa-4a59-b2de-2f567da4cbe7
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 863f2506-2a89-4ec1-a272-c993468ca777
+		summarizeBy: none
+		sourceColumn: Date de création
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Quota d''heures / an'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a3bbb2b-24f2-4f35-b011-d8b3ea820d68
+		summarizeBy: none
+		sourceColumn: Quota d'heures / an
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quota d''Heures / An consommée'
+		dataType: int64
+		formatString: 0
+		lineageTag: 92fc6998-07da-407a-bbc4-5fdbd48ad3d4
+		summarizeBy: none
+		sourceColumn: Quota d'Heures / An consommée
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'REL_Contrats_Entreprises.1.Entreprise_ID'
+		dataType: string
+		lineageTag: 41b57845-6a61-4ab5-8d26-31b06e56f234
+		summarizeBy: none
+		sourceColumn: REL_Contrats_Entreprises.1.Entreprise_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entreprise
+		dataType: string
+		lineageTag: 49756763-72a1-4509-b78f-82128aa6da66
+		summarizeBy: none
+		sourceColumn: Entreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	column Référence
+		dataType: string
+		lineageTag: 91d54b5a-fbf7-414b-bf3d-70fe58cc5d52
+		summarizeBy: none
+		sourceColumn: Référence
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Contrat = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\DIM'
+		source =
+				let
+				    Source = TAB_Contrats_TSF
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,300 @@
+table FACT_Tickets
+	lineageTag: 2230cbac-75d0-4c7b-8715-6eb70709a075
+
+	column 'Numéro de ticket'
+		dataType: int64
+		formatString: 0
+		displayFolder: DESCRIPTION
+		lineageTag: fb762f28-633e-4fcc-8e17-d22638841861
+		summarizeBy: sum
+		sourceColumn: Numéro de ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Objet / Intitulé'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: ed0a39b3-9b57-40c0-95f9-da09599d6e19
+		summarizeBy: none
+		sourceColumn: Objet / Intitulé
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ticket
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 4d718acf-0139-4b5a-af6c-7cebdad7061a
+		summarizeBy: none
+		sourceColumn: Ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email Demandeur'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: ae647635-d165-4cf3-89dd-03bea911329c
+		summarizeBy: none
+		sourceColumn: Email Demandeur
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Email CC'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: a65ff778-9e6b-4c70-903c-98ed98cbeea6
+		summarizeBy: none
+		sourceColumn: Email CC
+
+		annotation SummarizationSetBy = Automatic
+
+	column Demande
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 47b398a9-213f-4b0c-9f8b-38722da4f71c
+		summarizeBy: none
+		sourceColumn: Demande
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Description Coordinateur'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 8b03977f-cbe2-4ed3-9032-e7269cc66424
+		summarizeBy: none
+		sourceColumn: Description Coordinateur
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dernière justification de mise en attente'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 34d0125e-1119-4532-b1af-142ea02badf5
+		summarizeBy: none
+		sourceColumn: Dernière justification de mise en attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création M'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		displayFolder: DATE & TIME
+		lineageTag: cae99592-5c38-4d93-8cdb-4232aeeaac93
+		summarizeBy: none
+		sourceColumn: Date de création M
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Date de création'
+		dataType: dateTime
+		formatString: dd/mm/yy
+		displayFolder: DATE & TIME
+		lineageTag: bb4e80a7-e689-4758-8351-b387f4b7a756
+		summarizeBy: none
+		sourceColumn: Date de création
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Date passage au statut prise en compte'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: 17195dc9-d74d-433d-a6c7-1d38918176e9
+		summarizeBy: none
+		sourceColumn: Date passage au statut prise en compte
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date passage au statut résolu'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: 3b62504d-8a38-45a1-8b1f-2ac27f15cc04
+		summarizeBy: none
+		sourceColumn: Date passage au statut résolu
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date passage au statut facturé'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: e93a155e-2abf-4b38-a47d-46ec7155b45f
+		summarizeBy: none
+		sourceColumn: Date passage au statut facturé
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nombre heures facturables'
+		dataType: int64
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: 5767644d-c876-4d4f-9401-8d015e04c898
+		summarizeBy: sum
+		sourceColumn: Nombre heures facturables
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total HT'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: f44a7076-82b5-4ba3-8dd0-080377ff9cb2
+		summarizeBy: sum
+		sourceColumn: Total HT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'Total TGC'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: cf5b1504-0dc6-4aef-8930-cdabef6eda01
+		summarizeBy: sum
+		sourceColumn: Total TGC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'Total TTC'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: 5ca2567f-d099-4e87-9368-45d66bed7244
+		summarizeBy: sum
+		sourceColumn: Total TTC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'Date de création A'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		displayFolder: DATE & TIME
+		lineageTag: a259943a-a0cd-481f-8cd8-71eece243df5
+		summarizeBy: none
+		sourceColumn: Date de création A
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'REL_Entreprises_Tickets.Entreprise_ID'
+		dataType: string
+		isHidden
+		lineageTag: 2eff3f06-b16d-4999-b846-a5012d23d542
+		summarizeBy: none
+		sourceColumn: REL_Entreprises_Tickets.Entreprise_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'REL_Sites_Concerné_Tickets.Clients_ID'
+		dataType: string
+		isHidden
+		lineageTag: a8f920ea-588a-494b-98b6-762de7500a6a
+		summarizeBy: none
+		sourceColumn: REL_Sites_Concerné_Tickets.Clients_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DemandeDAssistanceV2_ID
+		dataType: string
+		isHidden
+		lineageTag: 3715e775-954f-4b82-bc95-36d8f75a9012
+		summarizeBy: none
+		sourceColumn: DemandeDAssistanceV2_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'REL_Affaire_Tickets.TEEPEE_AffairesCodex_ID'
+		dataType: string
+		isHidden
+		lineageTag: 752d6efa-8538-4038-9d36-5cd04fef6c2b
+		summarizeBy: none
+		sourceColumn: REL_Affaire_Tickets.TEEPEE_AffairesCodex_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Heures
+		dataType: int64
+		formatString: 0
+		displayFolder: DATE & TIME
+		lineageTag: b9d3398f-28db-44b7-b23a-a38a9d9dcf32
+		summarizeBy: sum
+		sourceColumn: Heures
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création - Copier'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		displayFolder: DATE & TIME
+		lineageTag: f91b02a6-1c28-4578-9613-1e7ce35f83cb
+		summarizeBy: none
+		sourceColumn: Date de création - Copier
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'REL_Contrat_Tickets.Contrats_ID'
+		dataType: string
+		isHidden
+		lineageTag: ff67fce7-0b20-4fa0-90c6-037598810fe0
+		summarizeBy: none
+		sourceColumn: REL_Contrat_Tickets.Contrats_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TP
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 32db0b66-d3b7-4759-9e93-d32b8fb94dc9
+		summarizeBy: none
+		sourceColumn: TP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Notifications désactivées'
+		dataType: int64
+		formatString: 0
+		displayFolder: DESCRIPTION
+		lineageTag: 7a92eb22-2d95-42c3-baf1-0b22331b9896
+		summarizeBy: sum
+		sourceColumn: Notifications désactivées
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Tickets = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\FACT'
+		source =
+				let
+				    Source = #"TAB_Demande_d'assistance_(tickets)_TSF",
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Manuel ou automatique", "Demande Auto", "Demande Manu", "Statut", "Catégorie", "Type", "REL_Priorité_Tickets.TAB_Priorité.Priorite", "QH"})
+				in
+				    #"Colonnes supprimées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,114 @@
+table DIM_Utilisateurs
+	lineageTag: dc1fd412-e8b9-457f-b79e-a23d13026e55
+
+	column USER_ID
+		dataType: string
+		lineageTag: d2949cda-82eb-4769-84c7-10d5a3227566
+		summarizeBy: none
+		sourceColumn: USER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column NOM
+		dataType: string
+		lineageTag: 58b1ec98-104b-447e-b40a-dba2accffcd0
+		summarizeBy: none
+		sourceColumn: NOM
+
+		annotation SummarizationSetBy = Automatic
+
+	column Prénom
+		dataType: string
+		lineageTag: f4230494-1e58-4004-8a28-a2bddeab2d2e
+		summarizeBy: none
+		sourceColumn: Prénom
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'NOM, Prénom'
+		dataType: string
+		lineageTag: 8e778c19-05ba-4c7c-93fb-b14d201e1b40
+		summarizeBy: none
+		sourceColumn: NOM, Prénom
+
+		annotation SummarizationSetBy = Automatic
+
+	column Téléphone
+		dataType: string
+		lineageTag: d371527a-3bd1-4a29-a422-10504cb7b8ee
+		summarizeBy: none
+		sourceColumn: Téléphone
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Courriel VINCI'
+		dataType: string
+		lineageTag: 90df9b7c-3558-49e2-8e0b-b33bdfd7036e
+		summarizeBy: none
+		sourceColumn: Courriel VINCI
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Courriel professionnel'
+		dataType: string
+		lineageTag: 051a5052-3784-4350-a5ba-841e4cde4b84
+		summarizeBy: none
+		sourceColumn: Courriel professionnel
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Matricule Codex'
+		dataType: int64
+		formatString: 0
+		lineageTag: cdd0cfd8-c3de-4974-931e-e22c9e170dc2
+		summarizeBy: none
+		sourceColumn: Matricule Codex
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Taux Horraires'
+		dataType: int64
+		formatString: 0
+		lineageTag: 855c8cdd-fe5c-4e0c-9669-9676d797f1d5
+		summarizeBy: none
+		sourceColumn: Taux Horraires
+
+		annotation SummarizationSetBy = Automatic
+
+	column Licence
+		dataType: string
+		lineageTag: 8a4e29c5-e5b5-4cbe-947c-d16200d56ca7
+		summarizeBy: none
+		sourceColumn: Licence
+
+		annotation SummarizationSetBy = Automatic
+
+	column Astreinte
+		dataType: string
+		lineageTag: f72f2ab3-c6a7-49e1-aa40-dec2b0c1bcab
+		summarizeBy: none
+		sourceColumn: Astreinte
+
+		annotation SummarizationSetBy = Automatic
+
+	column Mobile
+		dataType: string
+		lineageTag: 6aa4ab5d-c000-425c-acc0-80e0ec643992
+		summarizeBy: none
+		sourceColumn: Mobile
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Utilisateurs = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\DIM'
+		source =
+				let
+				    Source = TAB_Utilisateurs_TSF
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

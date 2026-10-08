@@ -1,0 +1,468 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "84104d854dad140a3c00",
+  "position": {
+    "x": 0,
+    "y": 119.02964959568733,
+    "z": 0,
+    "height": 601.18598382749326,
+    "width": 1280,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Tickets"
+                    }
+                  },
+                  "Property": "Ticket"
+                }
+              },
+              "queryRef": "FACT_Tickets.Ticket",
+              "nativeQueryRef": "Ticket"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Tickets"
+                    }
+                  },
+                  "Property": "Demande"
+                }
+              },
+              "queryRef": "FACT_Tickets.Demande",
+              "nativeQueryRef": "Demande"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Tickets"
+                    }
+                  },
+                  "Property": "Statut"
+                }
+              },
+              "queryRef": "DIM_Tickets.Statut",
+              "nativeQueryRef": "Statut"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Ordres_d'Interventions"
+                    }
+                  },
+                  "Property": "Date & heure début (prévisionnel)"
+                }
+              },
+              "queryRef": "FACT_Ordres_d'Interventions.Date & heure début (prévisionnel)",
+              "nativeQueryRef": "Programmée pour le",
+              "displayName": "Programmée pour le"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Ordres_d'Interventions"
+                    }
+                  },
+                  "Property": "Date & heure de compte rendu"
+                }
+              },
+              "queryRef": "FACT_Ordres_d'Interventions.Date & heure de compte rendu",
+              "nativeQueryRef": "Date & heure de compte rendu"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Ordres_d'Interventions"
+                    }
+                  },
+                  "Property": "Statut"
+                }
+              },
+              "queryRef": "FACT_Ordres_d'Interventions.Statut",
+              "nativeQueryRef": "Statut Intervention",
+              "displayName": "Statut Intervention"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Ordres_d'Interventions"
+                    }
+                  },
+                  "Property": "Intervention réaliser (site/distance)"
+                }
+              },
+              "queryRef": "FACT_Ordres_d'Interventions.Intervention réaliser (site/distance)",
+              "nativeQueryRef": "Sur site / à distance",
+              "displayName": "Sur site / à distance"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FACT_Ordres_d'Interventions"
+                    }
+                  },
+                  "Property": "Compte rendu"
+                }
+              },
+              "queryRef": "FACT_Ordres_d'Interventions.Compte rendu",
+              "nativeQueryRef": "Compte rendu"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Sites"
+                    }
+                  },
+                  "Property": "Nom du site"
+                }
+              },
+              "queryRef": "DIM_Sites.Nom du site",
+              "nativeQueryRef": "Site",
+              "displayName": "Site"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FACT_Ordres_d'Interventions"
+                        }
+                      },
+                      "Property": "TOTAL heures réalisées"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FACT_Ordres_d'Interventions.TOTAL heures réalisées)",
+              "nativeQueryRef": "Heures",
+              "displayName": "Heures"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FACT_Ordres_d'Interventions"
+                  }
+                },
+                "Property": "Date & heure début (prévisionnel)"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "171.65195474908387D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Ordres_d'Interventions.Compte rendu"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "185.5247978121419D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Tickets.Ticket"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "83.15801999793305D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Ordres_d'Interventions.Date & heure de compte rendu"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "98.12328934989871D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Ordres_d'Interventions.Date & heure début (prévisionnel)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "92.19130047680576D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_Sites.Nom du site"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73.82082532303792D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Ordres_d'Interventions.Intervention réaliser (site/distance)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "62D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FACT_Ordres_d'Interventions.TOTAL heures réalisées)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "325.85149997854404D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Tickets.Demande"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "85.41331327320982D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FACT_Ordres_d'Interventions.Statut"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "90.58099153376648D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_Tickets.Statut"
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "2L"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FACT_Ordres_d'Interventions.TOTAL heures réalisées)"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'AlternatingRowsNew'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "d4a0cdad0bab4a901e0d",
+  "position": {
+    "x": 324.8632218844985,
+    "y": 119.63525835866263,
+    "z": 0,
+    "height": 287.90273556231006,
+    "width": 575.80547112462011,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "TAB_Date"
+                        }
+                      },
+                      "Hierarchy": "Mois > Semaine > Jour"
+                    }
+                  },
+                  "Level": "Semaine"
+                }
+              },
+              "queryRef": "TAB_Date.Mois > Semaine > Jour.Semaine",
+              "nativeQueryRef": "Mois > Semaine > Jour Semaine",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "TAB_Date"
+                        }
+                      },
+                      "Hierarchy": "Mois > Semaine > Jour"
+                    }
+                  },
+                  "Level": "Jour"
+                }
+              },
+              "queryRef": "TAB_Date.Mois > Semaine > Jour.Jour",
+              "nativeQueryRef": "Mois > Semaine > Jour Jour",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Utilisateurs"
+                    }
+                  },
+                  "Property": "NOM, Prénom"
+                }
+              },
+              "queryRef": "DIM_Utilisateurs.NOM, Prénom",
+              "nativeQueryRef": "Utilisateur",
+              "active": true,
+              "displayName": "Utilisateur"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Affaires_Codex"
+                    }
+                  },
+                  "Property": "NUMÉRO D'AFFAIRE"
+                }
+              },
+              "queryRef": "DIM_Affaires_Codex.NUMÉRO D'AFFAIRE",
+              "nativeQueryRef": "NUMÉRO D'AFFAIRE",
+              "active": false
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "FACT_Pointage"
+                        }
+                      },
+                      "Property": "Temps Pointage Codex"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(FACT_Pointage.Temps Pointage Codex)",
+              "nativeQueryRef": "Somme de Temps Pointage Codex"
+            }
+          ]
+        }
+      }
+    },
+    "expansionStates": [
+      {
+        "roles": [
+          "Rows"
+        ],
+        "levels": [
+          {
+            "queryRefs": [
+              "DIM_Utilisateurs.NOM, Prénom"
+            ],
+            "isCollapsed": true,
+            "identityKeys": [
+              {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_Utilisateurs"
+                    }
+                  },
+                  "Property": "NOM, Prénom"
+                }
+              }
+            ],
+            "isPinned": true
+          },
+          {
+            "queryRefs": [
+              "DIM_Affaires_Codex.NUMÉRO D'AFFAIRE"
+            ],
+            "isCollapsed": true,
+            "isPinned": true
+          }
+        ],
+        "root": {}
+      }
+    ],
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "perColumnLevel": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "perRowLevel": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "levelSubtotalEnabled": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_Utilisateurs.NOM, Prénom"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "blankRows": [
+        {
+          "properties": {
+            "showBlankRows": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "autoExpand": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowHeaders": [
+        {
+          "properties": {
+            "urlIcon": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

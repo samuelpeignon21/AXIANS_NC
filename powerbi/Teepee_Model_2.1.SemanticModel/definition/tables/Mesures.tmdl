@@ -1,0 +1,205 @@
+table Mesures
+	lineageTag: 2afc5d95-bf48-4097-a006-20b03e985bf0
+
+	measure 'Valeur null' = 0
+		formatString: 0
+		lineageTag: 9c624f07-b5e4-4826-9872-a21ce0c11745
+
+	measure 'Valeur seuil Quota' = 30
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: c0ccef74-7168-4f6c-b912-0592e36efbb8
+
+	measure NBR_Pointages = COUNT(FACT_Pointage[Pointage_ID])
+		formatString: 0
+		displayFolder: POINTAGES
+		lineageTag: df976594-0368-46a6-8590-4938d1d49759
+
+	measure 'Mois sélectionné' =
+			
+			SELECTEDVALUE('TAB_Date'[Mois Nom])
+		displayFolder: POINTAGES
+		lineageTag: 426e5d2d-4b64-4273-8505-2ff461c8d5ee
+
+	measure NBR_POINTAGE_vld =
+			
+			CALCULATE(
+			    COUNTROWS(FACT_Pointage),
+			    FACT_Pointage[Valider (True/False)] = TRUE()
+			)
+		formatString: 0
+		displayFolder: POINTAGES
+		lineageTag: 0f63f4cc-2a79-48f6-8770-b086257639a9
+
+	measure %_Pointage_Vld =
+			
+			DIVIDE(
+			    [NBR_POINTAGE_vld],
+			    [NBR_Pointages],
+			    999
+			)
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: POINTAGES
+		lineageTag: 740834d8-2a98-4647-957b-ece8e76f4ff2
+
+	measure 'Total Heures Réalisées / Interventions' =
+			
+			SUM('FACT_Ordres_d''Interventions'[TOTAL heures réalisées])
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 01b7752d-d101-4c0c-9a84-c46d80a0c262
+
+	measure 'Heures Contrat' =
+			
+			SUM('DIM_Contrat'[Quota d'heures / an])
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 7a467ef2-f2f1-4a59-ae30-cd0f7ec16ff7
+
+	measure 'Solde heures QH' = ```
+			
+			SUM('DIM_Contrat'[Quota d'heures / an])
+			-
+			CALCULATE(
+			    SUM('FACT_Tickets'[Heures]),
+			    'DIM_Tickets'[QH] = 1
+			)
+			
+			```
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: f69d732c-65c1-4ad0-8bf4-367b562186c5
+
+	measure 'Heures consommées cumulées' =
+			
+			CALCULATE(
+			    SUM('FACT_Ordres_d''Interventions'[TOTAL heures réalisées]),
+			    FILTER(
+			        ALL(TAB_Date),
+			        TAB_Date[Date] <= MAX(TAB_Date[Date])
+			    )
+			)
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 583b2df2-6f56-4aaf-b618-1d5535919469
+
+	measure 'Heures consommées cumulées N-1' =
+			
+			CALCULATE(
+			    [Heures consommées cumulées],
+			    PARALLELPERIOD(TAB_Date[Date], -1, YEAR)
+			)
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 165c4b45-4337-43ee-8004-2f0874dd5c05
+
+	measure '% Solde Quota Restant' = [Solde heures QH] / [Heures Contrat]
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: d6a3e369-09fb-45bd-bc36-a516c6c4a037
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Statut Quota' =
+			
+			SWITCH(
+			    TRUE(),
+			    [% Solde Quota Restant] < 0.10, "CRITIQUE",
+			    [% Solde Quota Restant] < 0.30, "VIGILANCE",
+			    "OK"
+			)
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 61b3f295-7395-40f0-9a05-51bfd91a88e2
+
+	measure 'Nb Contrats Critique ou Vigilance' =
+			
+			COUNTROWS(
+			    FILTER(
+			        VALUES( DIM_Contrat[Contrats_ID] ),
+			        [Statut Quota] IN { "Critique", "Vigilance" }
+			    )
+			)
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 8f27eff3-6321-4431-a583-ed757aca1635
+
+	measure '80% Quota Atteint' = SUM(DIM_Contrat[Quota d'heures / an])*0.2
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 03eec54e-df30-4be8-9a73-fb7eaf089bf5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Statut TP' =
+			
+			VAR _Pct = [%_solde_TP_restant]
+			RETURN
+			    IF (
+			        ISBLANK ( _Pct ),
+			        BLANK (),
+			        SWITCH (
+			            TRUE (),
+			            _Pct < 0.10, "CRITIQUE",
+			            _Pct < 0.30, "VIGILANCE",
+			            "OK"
+			        )
+			    )
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: 78e1a920-d0a6-4cbe-9a99-ac551ec6863f
+
+	measure 'Solde Heures TechPack' =
+			
+			VAR _Disponible = SUM ( DIM_TechPack[Heures] )
+			VAR _Debut = MIN ( DIM_TechPack[Date_validité] )
+			VAR _Fin   = MAX ( DIM_TechPack[Date_fin_validité] )
+			VAR _Consomme =
+			    CALCULATE (
+			        SUM ( FACT_Tickets[Heures] ),
+			        REMOVEFILTERS ( TAB_Date ),
+			        FACT_Tickets[Date de création] >= _Debut,
+			        FACT_Tickets[Date de création] <= _Fin
+			    )
+			RETURN
+			    IF ( NOT ISBLANK ( _Disponible ), _Disponible - _Consomme )
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: b661917f-361d-405b-933d-52fb5fcf09ff
+
+	measure %_solde_TP_restant = 'Mesures'[Solde Heures TechPack] / SUM(DIM_TechPack[Heures])
+		formatString: 0\ %;-0\ %;0\ %
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: febe12db-2a04-430d-8cca-d3a9d8c156d7
+
+	measure 'Heures consommées TechPack' =
+			
+			SUMX (
+			    DIM_TechPack,
+			    VAR _Debut = DIM_TechPack[Date_validité]
+			    VAR _Fin   = DIM_TechPack[Date_fin_validité]
+			    RETURN
+			        CALCULATE (
+			            SUM ( FACT_Tickets[Heures] ),
+			            REMOVEFILTERS ( TAB_Date ),
+			            FACT_Tickets[Date de création] >= _Debut,
+			            FACT_Tickets[Date de création] <= _Fin
+			        )
+			)
+		formatString: 0
+		displayFolder: QUOTA D'HEURE & TP
+		lineageTag: f4c87dfb-d10c-4b45-847e-587d49f7ba3f
+
+	column Value
+		formatString: 0
+		lineageTag: 2dd53f76-45d1-41fc-9e29-059ebf2547e1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Mesures = calculated
+		mode: import
+		source = Row("Value", BLANK())
+
+	annotation PBI_Id = 10ec7034f869493aa4a4f032b5b5c969
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

@@ -1,0 +1,46 @@
+relationship AutoDetected_4cd9a7d2-4370-4aa2-84ad-5fa540dddad9
+	fromColumn: FACT_Pointage.'ID_Affaire_Codex.TEEPEE_AffairesCodex_ID'
+	toColumn: DIM_Affaires_Codex.TEEPEE_AffairesCodex_ID
+
+relationship AutoDetected_fc1ea60e-5a73-433f-9288-926523757774
+	fromColumn: FACT_Pointage.'ID_USER.USER_ID'
+	toColumn: DIM_Utilisateurs.USER_ID
+
+relationship ff7ebff2-a61f-822d-24c6-f6be66bd8ce0
+	fromColumn: FACT_Pointage.'Date Pointage'
+	toColumn: TAB_Date.Date
+
+relationship AutoDetected_6af56690-1d7f-42f9-998c-0c801ad354cd
+	fromColumn: FACT_Tickets.'REL_Entreprises_Tickets.Entreprise_ID'
+	toColumn: DIM_Entreprises.Entreprise_ID
+
+relationship AutoDetected_365b8c9b-973f-4c2c-b071-f0a629bfc185
+	fromColumn: FACT_Tickets.'REL_Sites_Concerné_Tickets.Clients_ID'
+	toColumn: DIM_Sites.Clients_ID
+
+relationship c43a98a2-80b5-9b17-fd9c-7cedbb429c14
+	fromColumn: FACT_Tickets.'REL_Affaire_Tickets.TEEPEE_AffairesCodex_ID'
+	toColumn: DIM_Affaires_Codex.TEEPEE_AffairesCodex_ID
+
+relationship 4d2fecf5-b21a-3558-7a3e-f40de8762f4f
+	fromColumn: FACT_Tickets.'Date de création - Copier'
+	toColumn: TAB_Date.Date
+
+relationship 45b1bc70-8953-42f9-cde0-28a5d5bad597
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: DIM_Tickets.DemandeDAssistanceV2_ID
+	toColumn: FACT_Tickets.DemandeDAssistanceV2_ID
+
+relationship b18dfae0-3de6-564f-8ad4-91db76435c67
+	fromColumn: 'FACT_Ordres_d''Interventions'.'REL_OI_Tickets_SRC.DemandeDAssistanceV2_ID'
+	toColumn: DIM_Tickets.DemandeDAssistanceV2_ID
+
+relationship AutoDetected_614218f9-87a5-47aa-a983-e38837bf5d5f
+	fromColumn: FACT_Tickets.'REL_Contrat_Tickets.Contrats_ID'
+	toColumn: DIM_Contrat.Contrats_ID
+
+relationship 109e1eb9-8734-b5cf-b1bd-57b53597eaac
+	fromColumn: FACT_Tickets.'REL_Entreprises_Tickets.Entreprise_ID'
+	toColumn: DIM_TechPack.'REL_TP_Entreprise.Entreprise_ID'
+
