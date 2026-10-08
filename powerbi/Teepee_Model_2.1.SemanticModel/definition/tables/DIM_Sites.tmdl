@@ -1,0 +1,66 @@
+table DIM_Sites
+	lineageTag: ccda95ac-8ab1-4db5-b21b-22ef1686263f
+
+	column Clients_ID
+		dataType: string
+		lineageTag: a0f62b71-2db9-46f6-a19d-8c21e8246e00
+		summarizeBy: none
+		sourceColumn: Clients_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_Incrémentée
+		dataType: int64
+		formatString: 0
+		lineageTag: 0178e346-d4dc-437e-9474-0dcb71da4f15
+		summarizeBy: none
+		sourceColumn: ID_Incrémentée
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nom du site'
+		dataType: string
+		lineageTag: 8833c0e8-71c6-4896-8eab-e6a089d49488
+		summarizeBy: none
+		sourceColumn: Nom du site
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 39fd51dc-5b6d-40db-b087-30548bd91a5e
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	column Téléphone
+		dataType: int64
+		formatString: 0
+		lineageTag: d18b758a-4980-4b19-900a-c47e33913c6d
+		summarizeBy: none
+		sourceColumn: Téléphone
+
+		annotation SummarizationSetBy = Automatic
+
+	column Adresse
+		dataType: string
+		lineageTag: d1152aa0-4af5-4efa-86e6-702d96127b6c
+		summarizeBy: none
+		sourceColumn: Adresse
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Sites = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\DIM'
+		source =
+				let
+				    Source = TAB_Sites_TSF
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

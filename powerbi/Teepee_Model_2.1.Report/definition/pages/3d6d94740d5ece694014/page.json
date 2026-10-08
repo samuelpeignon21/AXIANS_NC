@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "3d6d94740d5ece694014",
+  "displayName": "Tickets",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "pageBinding": {
+    "name": "0799e68c70d1111b29c6",
+    "type": "Default",
+    "parameters": []
+  }
+}

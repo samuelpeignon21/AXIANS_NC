@@ -1,0 +1,49 @@
+table DIM_Entreprises
+	lineageTag: c4047e84-1ec1-44b4-8baa-83004a27de6b
+
+	column Entreprise_ID
+		dataType: string
+		lineageTag: e618d494-ad61-438d-bd4c-daf3068594be
+		summarizeBy: none
+		sourceColumn: Entreprise_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Entreprise
+		dataType: string
+		lineageTag: 28b10b56-798a-4ad0-983d-591e5b995032
+		summarizeBy: none
+		sourceColumn: Entreprise
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro Client'
+		dataType: string
+		lineageTag: 6d902e58-90e5-49ae-bd8c-7b6add314d69
+		summarizeBy: none
+		sourceColumn: Numéro Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column TechPack
+		dataType: int64
+		formatString: 0
+		lineageTag: 596936ae-860d-45a5-a088-4beb38f361b7
+		summarizeBy: none
+		sourceColumn: TechPack
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Entreprises = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\DIM'
+		source =
+				let
+				    Source = TAB_Entreprises_TSF
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

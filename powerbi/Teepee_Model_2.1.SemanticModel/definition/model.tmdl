@@ -1,0 +1,102 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'API Safeplace'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'API Safeplace\00_Paramètres'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'API Safeplace\01_Sources_API'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'API Safeplace\00_Paramètres\Key'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'API Safeplace\00_Paramètres\Client_id'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'API Safeplace\00_Paramètres\Client_secret'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'API Safeplace\00_Paramètres\URL'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'API Safeplace\01_Sources_API\SRC_OI'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'API Safeplace\02_Transformées'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'API Safeplace\01_Sources_API\SRC_Pointages'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'API Safeplace\03_Model'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup 'API Safeplace\03_Model\FACT'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'API Safeplace\03_Model\DIM'
+
+	annotation PBI_QueryGroupOrder = 1
+
+queryGroup 'API Safeplace\03_Model\RELATIONS'
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup 'API Safeplace\01_Sources_API\SRC_Contrats'
+
+	annotation PBI_QueryGroupOrder = 4
+
+/// Erreurs dans les requêtes qui ont été chargées sur 30/09/2026 07:33:53.
+queryGroup 'Erreurs des requêtes – 30/09/2026 07:33:53'
+
+	annotation PBI_QueryGroupOrder = 16
+
+queryGroup 'API Safeplace\01_Sources_API\SRC_Contrats_TP'
+
+	annotation PBI_QueryGroupOrder = 5
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["TAB_Pointage","REL_Pointage_Utilisateur","TAB_Etiquettes","TAB_Equipements_IT","TAB_Note_Interne","REL_Pointage_Affaire","REL_Pointage_Ticket","TAB_Contacts","TAB_Priorité","key_ptg","id_ptg","id_ptg_s","key_tic","id_tic","key_OI","id_OI","id_OI_s","id_tic_s","url","TAB_Demande_d'assistance_(tickets)","TAB_Sites","TAB_Contrats","TAB_Demande_de_devis","TAB_Devis","TAB_Entreprises","TAB_Boite_de_reception","TAB_Affaires_Codex","TAB_Rôle","TAB_Technologies","TAB_Utilisateurs","TAB_Ordres_d'Interventions","REL_OI_Utilisateurs_SRC","REL_Affaire_Tickets","REL_Technologies_Tickets","REL_Contacts_Tickets_1","REL_Contacts_Tickets_2","REL_Contrat_Tickets","REL_Demande_de_devis_Tickets","REL_Devis_Tickets","REL_Entreprises_Tickets","REL_Equipements_IT_Tickets","REL_Etiquettes_Tickets","REL_Note_Interne_Tickets","REL_OI_Tickets_SRC","REL_Pointage_Tickets","REL_Priorité_Tickets","REL_Boite_de_reception_Tickets","REL_Rôles_Tickets","REL_Sites_Concerné_Tickets","REL_Sites_Renseignés_Tickets","REL_Utilisateurs_Tickets_SRC","TAB_Affaires_Codex_TSF","TAB_Utilisateurs_TSF","TAB_Pointage_TSF","TAB_Entreprises_TSF","TAB_Sites_TSF","TAB_Contacts_TSF","FACT_Tickets","FACT_Pointage","FACT_Ordres_d'Interventions","DIM_Tickets","DIM_Affaires_Codex","DIM_Utilisateurs","DIM_Entreprises","DIM_Sites","TAB_Demande_d'assistance_(tickets)_TSF","TAB_Ordres_d'Interventions_TSF","REL_Utilisateurs_Tickets","REL_OI_Entreprise","REL_OI_Site","TAB_Contrats_TSF","TAB_Contrats_TechPack_TSF","DIM_Contrat","key_ctr","id_ctr_s","id_ctr","REL_Contrats_Entreprises","Erreurs dans DIM_Utilisateurs","key_ctp","id_ctp","id_ctp_s","TAB_Contrats_TechPack","REL_TP_Entreprise","DIM_TechPack"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table TAB_Date
+ref table Mesures
+ref table FACT_Pointage
+ref table DIM_Affaires_Codex
+ref table DIM_Utilisateurs
+ref table FACT_Tickets
+ref table DIM_Tickets
+ref table 'FACT_Ordres_d''Interventions'
+ref table DIM_Entreprises
+ref table DIM_Sites
+ref table DIM_Contrat
+ref table DIM_TechPack
+
+ref cultureInfo fr-FR
+

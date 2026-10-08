@@ -1,0 +1,109 @@
+table DIM_Tickets
+	lineageTag: 9d0211de-1621-4b0f-b43f-46af00995b8e
+
+	column DemandeDAssistanceV2_ID
+		dataType: string
+		lineageTag: 26c69a42-07d6-47a3-8e38-9cc1ab944d78
+		summarizeBy: none
+		sourceColumn: DemandeDAssistanceV2_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Manuel ou automatique'
+		dataType: string
+		lineageTag: 3c3f7613-40d9-4d21-9b9b-8b165f32d1b3
+		summarizeBy: none
+		sourceColumn: Manuel ou automatique
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		lineageTag: 0efa52cd-4fb5-4bbb-9576-20296c0e13d3
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column Catégorie
+		dataType: string
+		lineageTag: 607276f2-a446-40dd-b013-755d5a0d2aa5
+		summarizeBy: none
+		sourceColumn: Catégorie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: 9d80bd53-23c5-42c2-91fe-fdc962805a21
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column QH
+		dataType: int64
+		formatString: 0
+		lineageTag: b71203a8-4435-48cd-bbc8-3551c564b650
+		summarizeBy: none
+		sourceColumn: QH
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'REL_Priorité_Tickets.TAB_Priorité.Priorite'
+		dataType: string
+		lineageTag: f601eac8-f208-4a23-b0f6-d28871abdd1e
+		summarizeBy: none
+		sourceColumn: REL_Priorité_Tickets.TAB_Priorité.Priorite
+
+		annotation SummarizationSetBy = Automatic
+
+	column Heures
+		dataType: int64
+		formatString: 0
+		lineageTag: c041cbfe-ef62-4fb8-9bf0-ba7be23bf22d
+		summarizeBy: none
+		sourceColumn: Heures
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro de ticket'
+		dataType: int64
+		formatString: 0
+		lineageTag: 83efd1e2-4cde-4e49-93e6-f1793d3a3d67
+		summarizeBy: none
+		sourceColumn: Numéro de ticket
+
+		annotation SummarizationSetBy = Automatic
+
+	column TP
+		dataType: string
+		lineageTag: 598a0cb9-21a6-4bf9-ab81-3f1f5291ecbd
+		summarizeBy: none
+		sourceColumn: TP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Notifications désactivées'
+		dataType: int64
+		formatString: 0
+		lineageTag: 48a75c01-a2b6-496b-ae66-35523896be12
+		summarizeBy: none
+		sourceColumn: Notifications désactivées
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DIM_Tickets = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\DIM'
+		source =
+				let
+				    Source = #"TAB_Demande_d'assistance_(tickets)_TSF",
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Objet / Intitulé", "Ticket", "Email Demandeur", "Email CC", "Demande Auto", "Demande Manu", "Demande", "Description Coordinateur", "Dernière justification de mise en attente", "Date de création M", "Date de création", "Date passage au statut prise en compte", "Date passage au statut résolu", "Date passage au statut facturé", "Nombre heures facturables", "Total HT", "Total TGC", "Total TTC", "REL_Entreprises_Tickets.Entreprise_ID", "REL_Sites_Concerné_Tickets.Clients_ID", "Date de création A", "Date de création - Copier", "REL_Affaire_Tickets.TEEPEE_AffairesCodex_ID", "REL_Contrat_Tickets.Contrats_ID"})
+				in
+				    #"Colonnes supprimées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 99.339457709122371
+          },
+          "nodeIndex": "Mesures",
+          "nodeLineageTag": "2afc5d95-bf48-4097-a006-20b03e985bf0",
+          "size": {
+            "height": 738.90808728411037,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1511.4159504805243,
+            "y": 1843.8176618537764
+          },
+          "nodeIndex": "DIM_Affaires_Codex",
+          "nodeLineageTag": "2b02331b-67f6-44d4-9d49-d8e92350bbde",
+          "size": {
+            "height": 582.28289647328415,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1204.7897714780731,
+            "y": 1836.9532421612973
+          },
+          "nodeIndex": "DIM_Utilisateurs",
+          "nodeLineageTag": "dc1fd412-e8b9-457f-b79e-a23d13026e55",
+          "size": {
+            "height": 383.65190500472045,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1211.4934826684573,
+            "y": 774.30547334772837
+          },
+          "nodeIndex": "FACT_Pointage",
+          "nodeLineageTag": "980b9061-4146-44e8-845d-217965827974",
+          "size": {
+            "height": 555.39948167108332,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1833.5912010998213,
+            "y": 0
+          },
+          "nodeIndex": "TAB_Date",
+          "nodeLineageTag": "5faa7fd4-5eee-45cd-af0a-48b35a200db9",
+          "size": {
+            "height": 514.26951681227024,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2444.8800642481478,
+            "y": 39.474833343661828
+          },
+          "nodeIndex": "DIM_Tickets",
+          "nodeLineageTag": "9d0211de-1621-4b0f-b43f-46af00995b8e",
+          "size": {
+            "height": 488.36259611818389,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 2184.1268008425018,
+            "y": 709.08082238207942
+          },
+          "nodeIndex": "FACT_Tickets",
+          "nodeLineageTag": "2230cbac-75d0-4c7b-8715-6eb70709a075",
+          "size": {
+            "height": 769.91227593924486,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 2936.5110309664651,
+            "y": 516.11463861600919
+          },
+          "nodeIndex": "FACT_Ordres_d'Interventions",
+          "nodeLineageTag": "7f4ee965-251a-4733-8f56-9d4a3afa1c35",
+          "size": {
+            "height": 1000,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1833.9472754998574,
+            "y": 1846.4173812333006
+          },
+          "nodeIndex": "DIM_Entreprises",
+          "nodeLineageTag": "c4047e84-1ec1-44b4-8baa-83004a27de6b",
+          "size": {
+            "height": 403.49990909668031,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 2131.2969425220736,
+            "y": 1848.0799793045892
+          },
+          "nodeIndex": "DIM_Sites",
+          "nodeLineageTag": "ccda95ac-8ab1-4db5-b21b-22ef1686263f",
+          "size": {
+            "height": 272.3131636871658,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 2424.5824817416619,
+            "y": 1848.6288471866812
+          },
+          "nodeIndex": "DIM_Contrat",
+          "nodeLineageTag": "03534a7a-add4-4a5f-8524-9b327788bc23",
+          "size": {
+            "height": 450.62339267175139,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 2762.1133288780024,
+            "y": 1859.8247184613406
+          },
+          "nodeIndex": "DIM_TechPack",
+          "nodeLineageTag": "e9703aca-7027-42cb-ad5e-4d6c74c5795b",
+          "size": {
+            "height": 463.67149881738305,
+            "width": 234
+          },
+          "zIndex": 2
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 39.450695702325831,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

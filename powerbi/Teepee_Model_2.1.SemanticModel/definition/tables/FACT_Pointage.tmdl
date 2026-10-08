@@ -1,0 +1,249 @@
+table FACT_Pointage
+	lineageTag: 980b9061-4146-44e8-845d-217965827974
+
+	column Pointage_ID
+		dataType: string
+		displayFolder: KEYS
+		lineageTag: a6795534-00ad-4ada-b033-6a51d9f20ef2
+		summarizeBy: none
+		sourceColumn: Pointage_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column ID_P_Pointage
+		dataType: string
+		isNullable: false
+		displayFolder: KEYS
+		lineageTag: aba4c9a9-2ba8-4ec1-bf37-b1d92174cd9a
+		summarizeBy: none
+		sourceColumn: ID_P_Pointage
+
+		annotation SummarizationSetBy = Automatic
+
+	column Travail
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: cb790754-5258-466c-a675-bfb4c8ad9e5e
+		summarizeBy: none
+		sourceColumn: Travail
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date Pointage'
+		dataType: dateTime
+		isNullable: false
+		formatString: Short Date
+		displayFolder: TIME
+		lineageTag: 1546e4ec-c745-424d-bf19-1051878bc3d9
+		summarizeBy: none
+		sourceColumn: Date Pointage
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Heure Début'
+		dataType: dateTime
+		formatString: Long Time
+		displayFolder: TIME
+		lineageTag: 41578136-f94d-4491-ad9e-a900e2a35f00
+		summarizeBy: none
+		sourceColumn: Heure Début
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Heure Fin'
+		dataType: dateTime
+		formatString: Long Time
+		displayFolder: TIME
+		lineageTag: 389bc3d5-49cf-4a8d-b3ba-051a182da6ce
+		summarizeBy: none
+		sourceColumn: Heure Fin
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column 'Heures Travaillées (calcul)'
+		dataType: double
+		displayFolder: TIME
+		lineageTag: 5e152d4e-6ad6-4adf-b4a7-f5af2d180019
+		summarizeBy: sum
+		sourceColumn: Heures Travaillées (calcul)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Heures Travaillées (brut)'
+		dataType: double
+		displayFolder: TIME
+		lineageTag: 6f78351e-d12c-44b7-810f-f18dd46d35e0
+		summarizeBy: sum
+		sourceColumn: Heures Travaillées (brut)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Déplacement (OUI/NON)'
+		dataType: int64
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: adeee810-d241-4383-9f6b-d816c01c13fa
+		summarizeBy: sum
+		sourceColumn: Déplacement (OUI/NON)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Temps Pointage Codex'
+		dataType: double
+		displayFolder: TIME
+		lineageTag: c2861837-f09c-4cac-9bab-a4b1436fc310
+		summarizeBy: sum
+		sourceColumn: Temps Pointage Codex
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Valider (True/False)'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: STATUT
+		lineageTag: 63c2debe-1301-432d-bb20-97d8fc5d8956
+		summarizeBy: none
+		sourceColumn: Valider (True/False)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Heures Facturables'
+		dataType: int64
+		formatString: 0
+		displayFolder: TIME
+		lineageTag: e01382de-5718-44d1-972c-870b620e113a
+		summarizeBy: sum
+		sourceColumn: Heures Facturables
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Taux Horraires USER'
+		dataType: decimal
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: b0cc8816-009c-4ea7-a929-11138112f85f
+		summarizeBy: sum
+		sourceColumn: Taux Horraires USER
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prix HT'
+		dataType: decimal
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: 9788679b-47db-49cc-8e5b-5070c43a8071
+		summarizeBy: sum
+		sourceColumn: Prix HT
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prix HT (sans déplacement)'
+		dataType: decimal
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: 34517b04-00bb-46ab-b04a-47fd3232af2e
+		summarizeBy: sum
+		sourceColumn: Prix HT (sans déplacement)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Pointage envoyer vers Codex (OUI/NON)'
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		displayFolder: STATUT
+		lineageTag: 0c1ba1f7-2150-4e7e-89f9-c107ded2b662
+		summarizeBy: none
+		sourceColumn: Pointage envoyer vers Codex (OUI/NON)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ID_Affaire_Codex.TEEPEE_AffairesCodex_ID'
+		dataType: string
+		displayFolder: KEYS
+		lineageTag: 24ee7e4e-3006-49e9-83f6-3ffd54bb15dd
+		summarizeBy: none
+		sourceColumn: ID_Affaire_Codex.TEEPEE_AffairesCodex_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'ID_USER.USER_ID'
+		dataType: string
+		displayFolder: KEYS
+		lineageTag: 3ba02d8d-4985-4c00-a4d0-c69737d3c1f5
+		summarizeBy: none
+		sourceColumn: ID_USER.USER_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Valider (OUI/NON)'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: 67fe171c-0e36-4ade-b5a2-333ebc74fbcd
+		summarizeBy: none
+		sourceColumn: Valider (OUI/NON)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'URL Web'
+		dataType: string
+		displayFolder: KEYS
+		lineageTag: cf3846f9-e5cb-4b09-8e1d-bfc7820a27af
+		summarizeBy: none
+		sourceColumn: URL Web
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ouvrir = "🔗Ouvrir"
+		displayFolder: KEYS
+		lineageTag: 9105b9d4-e3d2-4de4-a5ea-bfee983d7fa1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date & heure début'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: TIME
+		lineageTag: b19cd646-8b70-4236-97ba-beab2070ee5a
+		summarizeBy: none
+		sourceColumn: Date & heure début
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date & heure fin'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: TIME
+		lineageTag: bca01ef1-9b92-4a72-aa87-8b15eea3c718
+		summarizeBy: none
+		sourceColumn: Date & heure fin
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FACT_Pointage = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\FACT'
+		source =
+				let
+				    Source = TAB_Pointage_TSF
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

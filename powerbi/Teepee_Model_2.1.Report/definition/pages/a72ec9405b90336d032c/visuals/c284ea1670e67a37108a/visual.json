@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "c284ea1670e67a37108a",
+  "position": {
+    "x": 0,
+    "y": 0,
+    "z": 1000,
+    "height": 43.768996960486326,
+    "width": 212.03647416413375,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "image",
+    "objects": {
+      "image": [
+        {
+          "properties": {
+            "sourceFile": {
+              "image": {
+                "name": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'D4bsyvtPBLIwPAyuLlE7yDoy9fVMZASd02u9EPvtzdukIJnT8YLdl1T5R8NUGVY7wk0jh0pZQOyIJReQTuSjHfwtpgUosAs4MiE1-YVA0_j8slQIOblQVz6NXm8n_pem_lgQ6uo5VBYwP5Sm86qQ1nr8kWRM2mQr8H14ITlSuMthZENDP1wlUKUQDSbHtVqu.jpg'"
+                    }
+                  }
+                },
+                "url": {
+                  "expr": {
+                    "ResourcePackageItem": {
+                      "PackageName": "RegisteredResources",
+                      "PackageType": 1,
+                      "ItemName": "D4bsyvtPBLIwPAyuLlE7yDoy9fVMZA8577403175095749.jpg"
+                    }
+                  }
+                },
+                "scaling": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'Normal'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

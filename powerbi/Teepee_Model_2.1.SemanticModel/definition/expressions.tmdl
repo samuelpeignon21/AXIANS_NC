@@ -1,0 +1,1756 @@
+expression key_ptg = "<A_RENSEIGNER_KEY_PTG>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 2cc89063-e6d9-466a-8f02-60a4985365bb
+	queryGroup: 'API Safeplace\00_Paramètres\Key'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_ptg = "<A_RENSEIGNER_ID_PTG>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0e11d7bd-f85f-4473-87db-8f533dbeb300
+	queryGroup: 'API Safeplace\00_Paramètres\Client_id'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_ptg_s = "<A_RENSEIGNER_ID_PTG_S>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 26c5df36-f083-4f67-a88e-b551ce953f0a
+	queryGroup: 'API Safeplace\00_Paramètres\Client_secret'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression key_tic = "<A_RENSEIGNER_KEY_TIC>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 9e865723-d175-4edb-b7ba-546c6804abff
+	queryGroup: 'API Safeplace\00_Paramètres\Key'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_tic = "<A_RENSEIGNER_ID_TIC>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 4cc9bf96-1bc0-400a-9b53-bddf15cfc712
+	queryGroup: 'API Safeplace\00_Paramètres\Client_id'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression key_OI = "<A_RENSEIGNER_KEY_OI>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 24f59b82-54b7-4793-8db6-9704d88b65c9
+	queryGroup: 'API Safeplace\00_Paramètres\Key'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_OI = "<A_RENSEIGNER_ID_OI>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 8f6ec421-daa3-463c-9612-5b39ad5f1f6e
+	queryGroup: 'API Safeplace\00_Paramètres\Client_id'
+
+	annotation PBI_ResultType = Text
+
+expression id_OI_s = "<A_RENSEIGNER_ID_OI_S>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 0a74262f-18e3-487a-8ffb-70d16f8c6406
+	queryGroup: 'API Safeplace\00_Paramètres\Client_secret'
+
+	annotation PBI_ResultType = Text
+
+expression id_tic_s = "<A_RENSEIGNER_ID_TIC_S>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 1595a92d-8495-4fc1-8a2c-c6c009f35749
+	queryGroup: 'API Safeplace\00_Paramètres\Client_secret'
+
+	annotation PBI_ResultType = Text
+
+expression url = "https://safeplace.teepee.fr" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 62f42f93-0165-444b-ba3f-ac31d4d7b47c
+	queryGroup: 'API Safeplace\00_Paramètres\URL'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression TAB_Pointage =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ptg,
+		                        client_secret = id_ptg_s
+		                    ],
+		                    RelativePath = key_ptg
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Pointage_Sheet = Source{[Item="Pointage",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Pointage_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Pointage_ID", type text}, {"TypeDeTravail", Int64.Type}, {"DateDuTravail", type date}, {"HeuresTravailleEs_1", type number}, {"Compteur", Int64.Type}, {"ValideParUnResponsable", type logical}, {"ValidationResponsable", type number}, {"JustificationDesTravauxReAliseS", type text}, {"TauxHorraires", Currency.Type}, {"CouTDuPointage", Currency.Type}, {"ChangementDeNumeRoDAffaire", type text}, {"PrixHT", Currency.Type}, {"CoutDuPointageSansDePlacement", Currency.Type}, {"FIOUOI", Int64.Type}, {"UniteDeTempsDeDePlacement30min", Int64.Type}, {"PointageEnvoyeDansCodex", type logical}, {"IDPointage", type text}, {"HeuresFacturable", Int64.Type}, {"DePlacement", Int64.Type}, {"TempsDePointageSurCodex", type number}, {"HeureDeDeBut", type time}, {"HeureDeFin", type time}, {"HeureTravailleEs", type number}})
+		in
+		    #"Type modifié"
+	lineageTag: 71cd9067-43f4-4e0e-84c8-febc4e1a56ae
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Pointages'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Pointage_Utilisateur =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ptg,
+		                        client_secret = id_ptg_s
+		                    ],
+		                    RelativePath = key_ptg
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_R Utilisateur V _Sheet" = Source{[Item="Rel_R Utilisateur V ",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_R Utilisateur V _Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Pointage_ID", type text}, {"USER_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: a747df98-c688-4340-a4b6-028be587f22b
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Pointages'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Pointage_Affaire =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ptg,
+		                        client_secret = id_ptg_s
+		                    ],
+		                    RelativePath = key_ptg
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_R AffairesCodex _Sheet" = Source{[Item="Rel_R AffairesCodex ",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_R AffairesCodex _Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Pointage_ID", type text}, {"TEEPEE_AffairesCodex_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 85c200b1-eb4d-42c5-b806-b6059199eba9
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Pointages'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Sites =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Clients_Sheet = Source{[Item="Clients",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Clients_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Clients_ID", type text}, {"Adresse", type text}, {"IDIncreMente", Int64.Type}, {"Email", type text}, {"Telephone", Int64.Type}, {"NomDuSite", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 60378693-30f6-46fd-bafd-4ccd8646f635
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Contrats =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Contrats_Sheet = Source{[Item="Contrats",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Contrats_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Contrats_ID", type text}, {"NomDuContrat", type text}, {"NumeRoDeContrat", Int64.Type}, {"Commentaires", type text}, {"DateDeSignature", type date}, {"DureE", Int64.Type}, {"NombreEnJours", Int64.Type}, {"DateDePreAvis", type date}, {"DateDeFinDuContrat_1", type date}, {"DateDeLaDernieReMaintenance", type date}, {"Statut", type text}, {"DateDeCreAtion", type date}, {"QuotaDHeuresAn", Int64.Type}, {"QuotaDHeuresAnConsommeE", Int64.Type}}),
+		    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"DateDeLaDernieReMaintenance"})
+		in
+		    #"Colonnes supprimées"
+	lineageTag: 59fd8a3f-5e2f-4ea9-917e-e88ef021ba67
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Demande_de_devis =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    DemandeDeDevisV2_Sheet = Source{[Item="DemandeDeDevisV2",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(DemandeDeDevisV2_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDeDevisV2_ID", type text}, {"DateDeCreAtion", type date}, {"DescriptionLieEALOpeRateurOuLeFAI", type any}, {"DescriptionLieEALOpeRateurOuLeFAILoginFAILoginRouteurLoginWIFI", type any}, {"BesoinPIRLEscabeauNacellePreCiserLaHauteur", type any}, {"PhotoDeLaPositionDesBornes", type any}, {"OPTFAI", type any}, {"NDD", Int64.Type}, {"IntituleDeLaDemandeDeDevis", type text}, {"CompteRenduDeLaDemandeDeDevis", type text}, {"MesuresParticulieResDeSeCuriteFacultatif", type text}, {"Statut", type text}, {"JustificationDeRefus", type text}, {"DescriptionDeLaDemandeClient", type text}, {"NumeRoDeCommandeLieALaLicence", type text}, {"DescriptionDeLaDemandeClient_1", type any}, {"InformationsSurLeNombreDePrisesBornesAinsiQueLeursPositions", type text}, {"CompteurDemandeDeDevis", Int64.Type}, {"TypeDeNouveauDevisACreEr", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 7f0c041c-60f6-4b1d-824b-30f98ac3e11a
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Devis =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    DevisV2_Sheet = Source{[Item="DevisV2",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(DevisV2_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DevisV2_ID", type text}, {"NumeRoDeDevis", Int64.Type}, {"Statut", type text}, {"DateDeCreAtionDuDevis", type date}, {"CommentaireInterne", type text}, {"TypeDeDevis", type text}, {"DeLaisCommandeDeButDesTravaux", Int64.Type}, {"Paiement", Int64.Type}, {"DescriptionGeNeRal", type text}, {"NombreDePrestation", Int64.Type}, {"IDDevis", type text}, {"TOTALHT", Int64.Type}, {"TOTALTTC", Int64.Type}, {"TOTALHT1", Int64.Type}, {"TOTAL", Int64.Type}, {"NouvelleValeurCompteurValiditeDeLOffre", type date}, {"CompteurRelance", type date}, {"DateDeFinDeValiditeDeLOffre", type date}, {"NombreDeJoursRestantsAvantLaFinDeLOffre", Int64.Type}, {"FreQuenceDesRappelsEnJours", Int64.Type}, {"DateDeDeButDeValiditeDeLOffre", type date}, {"NombreDeFournisseur", Int64.Type}, {"CateGorieDeDevis", type text}, {"NumeRoDEnregistrementCodex", type text}, {"DevisHT", Int64.Type}, {"DevisTTC", Int64.Type}, {"TOTALTGC", Int64.Type}, {"ValiditeDeLOffre_1", type date}})
+		in
+		    #"Type modifié"
+	lineageTag: d8083727-0875-4d8c-bb61-a4b88e4c1c20
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Entreprises =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Entreprise_Sheet = Source{[Item="Entreprise",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Entreprise_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Entreprise_ID", type text}, {"NomDeLEntreprise", type text}, {"NumeRoClient", type text}, {"TechPack", Int64.Type}})
+		in
+		    #"Type modifié"
+	lineageTag: b2db68e6-a401-4dc9-b182-ece0fdf02b6f
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'TAB_Ordres_d''Interventions' =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_OI,
+		                        client_secret = id_OI_s
+		                    ],
+		                    RelativePath = key_OI
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    OrdreDInterventionV2_Sheet = Source{[Item="OrdreDInterventionV2",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(OrdreDInterventionV2_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"OrdreDInterventionV2_ID", type text}, {"OrdreDInterventionOI", Int64.Type}, {"TypeDIntervention", type text}, {"DateDeCreAtion", type datetime}, {"DateEtHeureDeDeButDIntervention", type datetime}, {"DateEtHeureFinDIntervention", type datetime}, {"Commentaires", type text}, {"JePeuxTravaillerEnSeCurite_1", type text}, {"StatutDeLOI", type text}, {"Observation11", type text}, {"CompteRenduClient", type text}, {"SignatureTechnicien", type text}, {"SignatureClient", type text}, {"SignataireTechnicien", type text}, {"SignataireClient", type text}, {"StatutDeLIntervention", type text}, {"SousContrat", Int64.Type}, {"11EncombrementDuLocal", type text}, {"12ClimatisationDuLocal", type text}, {"Observation12", type text}, {"OpeRationDeControLeReAliseEs", type text}, {"21ConnexionMachineNModem", type text}, {"Observation21", type text}, {"22VersionDeLaMachineEtPatchsInstalleS", type text}, {"Observation22", type text}, {"23SauvegardeDeLaBaseDeDonneEs", type text}, {"Observation23", type text}, {"24LectureHistoriqueAlarmesEtIncidents", type text}, {"Observation24", type text}, {"25PosteOpeRateurStandardOuPOPC", type text}, {"Observation25", type text}, {"26Heure", type text}, {"Observation26", type text}, {"27GuidesParlantsEtMusiqueDAttente", type text}, {"Observation27", type text}, {"28TestDeRemonteEsDAlarmesEtIncidents", type text}, {"Observation28", type text}, {"29LiensOpeRateursEtLiensIP", type text}, {"Observation29", type text}, {"31ControLeDeLEnvironnement", type text}, {"Observation31", type text}, {"32ControLeDeMeCanismeDesConnexions", type text}, {"Observations32", type text}, {"33ControLeVisuelDesBatteries", type text}, {"Observation33", type text}, {"5Minutes", type text}, {"15Minutes", type text}, {"30Minutes", type text}, {"45Minutes", type text}, {"60Minutes", type text}, {"41MessagerieVocale", type text}, {"Observation41", type text}, {"Observation34", type text}, {"42Taxation", type text}, {"Observation42", type text}, {"43CentreDeGestion", type text}, {"Observation43", type text}, {"44ServeurACD", type text}, {"Observation44", type text}, {"45Passerelles", type text}, {"Observation45", type text}, {"46SeCurisation", type text}, {"Observation46", type text}, {"JustificationDeMiseEnAttente", type text}, {"TOTALSommeArticlesSortants", Int64.Type}, {"Facturation", type text}, {"TOTALHeuresTravailleEs", Int64.Type}, {"EntreESortie", type text}, {"CompteurIntervention", Int64.Type}, {"TOTALHeuresTravailleEs_1", Int64.Type}, {"CompteurInterventionFacturable", Int64.Type}, {"DateEtHeureDeCompteRenduHeureFR", type datetime}, {"DateEtHeureDeCompteRendu", type datetime}, {"TOTALUniteSDArticlesSortant", Int64.Type}, {"ChangementDAffaireBI_1", type text}, {"DateEtHeureDeDeButFR", type datetime}, {"DateEtHeureDeFinFR", type datetime}, {"TOTALMateRielsTTC", Currency.Type}, {"TAXEMateRiels", Int64.Type}, {"TAXEPrestations", Int64.Type}, {"TOTALTaxeMateRiels", Currency.Type}, {"TOTALPrestationsHT", Currency.Type}, {"TOTALPrestationTTC", Currency.Type}, {"TOTALTaxePrestation", Currency.Type}, {"TOTALIntervention_1", Currency.Type}, {"TOTALMateRielsHT", Currency.Type}, {"TOTALMontantHT", Currency.Type}, {"TOTALTGC", Currency.Type}, {"TOTALMontantHT_1", Currency.Type}, {"TOTALTTC", Currency.Type}, {"TOTALTGC_1", Currency.Type}, {"TOTALTGCFacturation", Currency.Type}, {"TOTALHTFacturation", Int64.Type}, {"SAV", Int64.Type}, {"Projet", Int64.Type}, {"Maintenance", Int64.Type}, {"StatutDeSignatureClient", type text}, {"Facturable", Int64.Type}, {"NonFacturable", Int64.Type}, {"InterventionSurSiteOuADistance", type text}, {"StatutAttachementSigne", type text}, {"DateEtHeureDeDeButDIntervention1", type datetime}, {"AFaire", Int64.Type}, {"InterventionAReAliser", type text}, {"ReSolu", Int64.Type}, {"EnAttente", Int64.Type}, {"210LienIP", type text}, {"Observation210", type text}, {"Articles", Int64.Type}}),
+		    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"JePeuxTravaillerEnSeCurite_1", "SAV", "Projet", "Maintenance", "Facturable", "NonFacturable", "AFaire", "EnAttente", "ReSolu", "Articles", "DateEtHeureDeDeButFR", "DateEtHeureDeFinFR", "TOTALMontantHT", "TOTALTGC", "TOTALTGCFacturation", "TOTALHTFacturation", "TOTALIntervention_1", "TOTALTaxePrestation", "TOTALPrestationTTC", "TOTALTaxeMateRiels", "TAXEPrestations", "TAXEMateRiels", "ChangementDAffaireBI_1", "TOTALUniteSDArticlesSortant", "CompteurInterventionFacturable", "TOTALHeuresTravailleEs_1", "CompteurIntervention", "EntreESortie", "DateEtHeureDeDeButDIntervention1", "StatutDeLIntervention", "SignatureTechnicien", "SignatureClient", "DateEtHeureDeCompteRenduHeureFR", "TOTALMateRielsTTC"})
+		in
+		    #"Colonnes supprimées"
+	lineageTag: 2c55d8f7-b82b-4461-897c-37baa530a5ed
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_OI'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Affaire_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Affaire_Sheet = Source{[Item="Rel_Affaire",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Affaire_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"TEEPEE_AffairesCodex_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: eaa211f2-f314-41c5-a930-bd1edd542874
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Technologies_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Catégorie_Sheet = Source{[Item="Rel_Catégorie",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Catégorie_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"TypeDeTicket2_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 289a1194-7af1-4663-895e-6f539aba9c44
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Contacts_Tickets_2 =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Contacts demande_Sheet" = Source{[Item="Rel_Contacts demande",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Contacts demande_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Particuliers_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: de2001cc-a434-4a71-b8dc-885125a6b045
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Contrat_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Contrat_Sheet = Source{[Item="Rel_Contrat",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Contrat_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Contrats_ID", type text}}),
+		    #"Doublons supprimés" = Table.Distinct(#"Type modifié", {"DemandeDAssistanceV2_ID"})
+		in
+		    #"Doublons supprimés"
+	lineageTag: 441679b1-cebf-4d4b-af3f-c79bd629412a
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Entreprises_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Entreprise_Sheet = Source{[Item="Rel_Entreprise",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Entreprise_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Entreprise_ID", type text}}),
+		    #"Doublons supprimés" = Table.Distinct(#"Type modifié", {"DemandeDAssistanceV2_ID"})
+		in
+		    #"Doublons supprimés"
+	lineageTag: 98dd81d5-debd-41d9-9a2f-913f99e7223f
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Priorité_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Priorité_Sheet = Source{[Item="Rel_Priorité",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Priorité_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Priorite_ID", type text}}),
+		    #"Requêtes fusionnées" = Table.NestedJoin(#"Type modifié", {"Priorite_ID"}, TAB_Priorité, {"Priorite_ID"}, "TAB_Priorité", JoinKind.LeftOuter),
+		    #"TAB_Priorité développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "TAB_Priorité", {"Priorite"}, {"TAB_Priorité.Priorite"})
+		in
+		    #"TAB_Priorité développé"
+	lineageTag: 25e66980-de57-48ed-934c-ba6e1fe765a1
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Sites_Concerné_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Site Concerné_Sheet" = Source{[Item="Rel_Site Concerné",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Site Concerné_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Clients_ID", type text}}),
+		    #"Doublons supprimés" = Table.Distinct(#"Type modifié", {"DemandeDAssistanceV2_ID"})
+		in
+		    #"Doublons supprimés"
+	lineageTag: 664b5439-e27c-4e52-bbbb-3eb558690a69
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Sites_Renseignés_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Site Renseigné_Sheet" = Source{[Item="Rel_Site Renseigné",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Site Renseigné_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Clients_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 36d32732-dc26-4e87-8b68-3d6fb8ea6477
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Utilisateurs_Tickets_SRC =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Utilisateur_Sheet = Source{[Item="Rel_Utilisateur",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Utilisateur_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"USER_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 1eb574e8-4d4a-4a0c-b52d-235cfc27748c
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Pointage_TSF =
+		let
+		    Source = TAB_Pointage,
+		    Jointure_REL_Affaire = Table.NestedJoin(Source, {"Pointage_ID"}, REL_Pointage_Affaire, {"Pointage_ID"}, "REL_Pointage_Affaire", JoinKind.LeftOuter),
+		    Expand_ID_affaire = Table.ExpandTableColumn(Jointure_REL_Affaire, "REL_Pointage_Affaire", {"TEEPEE_AffairesCodex_ID"}, {"ID_Affaire_Codex.TEEPEE_AffairesCodex_ID"}),
+		    Jointure_REL_USER = Table.NestedJoin(Expand_ID_affaire, {"Pointage_ID"}, REL_Pointage_Utilisateur, {"Pointage_ID"}, "REL_Pointage_Utilisateur", JoinKind.LeftOuter),
+		    Expand_ID_USER = Table.ExpandTableColumn(Jointure_REL_USER, "REL_Pointage_Utilisateur", {"USER_ID"}, {"ID_USER.USER_ID"}),
+		    #"Colonnes inutiles - supprimées" = Table.RemoveColumns(Expand_ID_USER,{"TypeDeTravail", "Compteur", "ValidationResponsable", "ChangementDeNumeRoDAffaire", "FIOUOI", "UniteDeTempsDeDePlacement30min", "CouTDuPointage"}),
+		    #"Colonnes permutées" = Table.ReorderColumns(#"Colonnes inutiles - supprimées",{"Pointage_ID", "IDPointage", "JustificationDesTravauxReAliseS", "DateDuTravail", "HeureDeDeBut", "HeureDeFin", "HeureTravailleEs", "HeuresTravailleEs_1", "DePlacement", "TempsDePointageSurCodex", "ValideParUnResponsable", "HeuresFacturable", "TauxHorraires", "PrixHT", "CoutDuPointageSansDePlacement", "PointageEnvoyeDansCodex", "ID_Affaire_Codex.TEEPEE_AffairesCodex_ID", "ID_USER.USER_ID"}),
+		    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"IDPointage", "ID_P_Pointage"}, {"JustificationDesTravauxReAliseS", "Travail"}, {"DateDuTravail", "Date Pointage"}, {"HeureDeDeBut", "Heure Début"}, {"HeureDeFin", "Heure Fin"}, {"HeureTravailleEs", "Heures Travaillées (calcul)"}, {"HeuresTravailleEs_1", "Heures Travaillées (brut)"}, {"DePlacement", "Déplacement (OUI/NON)"}, {"TempsDePointageSurCodex", "Temps Pointage Codex"}, {"ValideParUnResponsable", "Valider (True/False)"}, {"HeuresFacturable", "Heures Facturables"}, {"TauxHorraires", "Taux Horraires USER"}, {"PrixHT", "Prix HT"}, {"CoutDuPointageSansDePlacement", "Prix HT (sans déplacement)"}, {"PointageEnvoyeDansCodex", "Pointage envoyer vers Codex (OUI/NON)"}}),
+		    #"Colonne conditionnelle ""Valider OUI/NON"" ajoutée" = Table.AddColumn(#"Colonnes renommées", "Valider (OUI/NON)", each if [#"Valider (True/False)"] = false then "NON" else if [#"Valider (True/False)"] = true then "OUI" else null, type text),
+		    #"Colonne fusionnée insérée" = Table.AddColumn(#"Colonne conditionnelle ""Valider OUI/NON"" ajoutée", "URL Web", each Text.Combine({"https://safeplace.teepee.fr/#/viewData/51DE749F/45FCA41F/Pointage/Pointage/", [Pointage_ID]}), type text),
+		    #"Ajout Date & heure début" = Table.AddColumn(#"Colonne fusionnée insérée", "Date & heure début", each [Date Pointage] & [Heure Début]),
+		    #"Ajout Date & heure fin" = Table.AddColumn(#"Ajout Date & heure début", "Date & heure fin", each [Date Pointage] & [Heure Fin]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"Ajout Date & heure fin",{{"Date & heure début", type datetime}, {"Date & heure fin", type datetime}}),
+		    #"Colonnes permutées (date & heures)" = Table.ReorderColumns(#"Type modifié",{"Pointage_ID", "ID_P_Pointage", "Travail", "Date Pointage", "Heure Début", "Heure Fin", "Date & heure début", "Date & heure fin", "Heures Travaillées (calcul)", "Heures Travaillées (brut)", "Déplacement (OUI/NON)", "Temps Pointage Codex", "Valider (True/False)", "Heures Facturables", "Taux Horraires USER", "Prix HT", "Prix HT (sans déplacement)", "Pointage envoyer vers Codex (OUI/NON)", "ID_Affaire_Codex.TEEPEE_AffairesCodex_ID", "ID_USER.USER_ID", "Valider (OUI/NON)", "URL Web"})
+		in
+		    #"Colonnes permutées (date & heures)"
+	lineageTag: 961dfc1c-4059-41ec-a768-d92145d6e9cf
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Utilisateurs_TSF =
+		let
+		    Source = TAB_Utilisateurs,
+		    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"Compteurs", "Signature"}),
+		    #"Colonnes permutées" = Table.ReorderColumns(#"Colonnes supprimées",{"USER_ID", "nom", "prenom", "TeLePhone", "email", "Mail", "MatriculeCodex", "TauxHorraires", "AssignLicense", "Astreinte"}),
+		    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"nom", "NOM"}, {"prenom", "Prénom"}, {"TeLePhone", "Téléphone"}, {"email", "Courriel VINCI"}, {"Mail", "Courriel professionnel"}, {"MatriculeCodex", "Matricule Codex"}, {"TauxHorraires", "Taux Horraires"}, {"AssignLicense", "Licence"}}),
+		    #"Colonne NOM - Prénom Fusionnée" = Table.AddColumn(#"Colonnes renommées", "NOM, Prénom", each Text.Combine({[NOM], ", ", [Prénom]})),
+		    #"Type modifié" = Table.TransformColumnTypes(#"Colonne NOM - Prénom Fusionnée",{{"NOM, Prénom", type text}}),
+		    #"Colonnes permutées1" = Table.ReorderColumns(#"Type modifié",{"USER_ID", "NOM", "Prénom", "NOM, Prénom", "Téléphone", "Courriel VINCI", "Courriel professionnel", "Matricule Codex", "Taux Horraires", "Licence", "Astreinte"})
+		in
+		    #"Colonnes permutées1"
+	lineageTag: f0faba47-6a81-45c4-a337-7cba717f9dc7
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Affaires_Codex_TSF =
+		let
+		    Source = TAB_Affaires_Codex,
+		    #"Colonnes fusionnées" = Table.CombineColumns(Source,{"WBS_ID", "PROJECT_LONG_DESC"},Combiner.CombineTextByDelimiter(" - ", QuoteStyle.None),"NUMÉRO D'AFFAIRE")
+		in
+		    #"Colonnes fusionnées"
+	lineageTag: 5d8d4b1b-830f-4258-b78e-b1d49f9a0c8b
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Etiquettes =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Etiquettes_Sheet = Source{[Item="Etiquettes",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Etiquettes_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Etiquettes_ID", type text}, {"Etiquette", type text}, {"CompteurEt", Int64.Type}})
+		in
+		    #"Type modifié"
+	lineageTag: ee4e8672-8e3c-4eb8-89a4-e6f19146d96d
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Equipements_IT =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    EquipementsIT_Sheet = Source{[Item="EquipementsIT",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(EquipementsIT_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"EquipementsIT_ID", type text}, {"EquipementIT", type text}, {"CompteurEq", Int64.Type}})
+		in
+		    #"Type modifié"
+	lineageTag: 10ee73c0-f9b6-4f17-9d4c-ffa7e547c21a
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Note_Interne =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    NoteInterne_Sheet = Source{[Item="NoteInterne",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(NoteInterne_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"NoteInterne_ID", type text}, {"IDNoteInterne", Int64.Type}, {"CompteurNote", Int64.Type}, {"CompteurEnregisitrement", Int64.Type}, {"Note", type text}, {"DateDeCreAtion", type datetime}})
+		in
+		    #"Type modifié"
+	lineageTag: 6a2c65d8-254a-49e1-86c2-3e08a940ad2b
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Contacts =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Particuliers_Sheet = Source{[Item="Particuliers",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Particuliers_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Particuliers_ID", type text}, {"IDIncreMente", Int64.Type}, {"Telephone", type text}, {"NomDuContact", type text}, {"PosteOccupe", type text}, {"Courriel", type text}, {"Mobile", type text}, {"TELMOB", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 54acb2e7-7002-4c91-a1c3-75b878ba7880
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Priorité =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Priorite_Sheet = Source{[Item="Priorite",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Priorite_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Priorite_ID", type text}, {"Priorite", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: b1771a83-5c15-43d4-8a28-60b852eb1f77
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'TAB_Demande_d''assistance_(tickets)' =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    DemandeDAssistanceV2_Sheet = Source{[Item="DemandeDAssistanceV2",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(DemandeDAssistanceV2_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"EMailDuDemandeur", type text}, {"Objet", type text}, {"Demande", type text}, {"NumeRoDeTicket", Int64.Type}, {"Description", type text}, {"StatutDuTicket", type text}, {"ConcateNationObjet", type text}, {"DernieReJustificationDeMiseEnAttente", type text}, {"DateDInterventionProgrammeEnAttenteDePasse", type datetime}, {"Messagerie", type text}, {"ReCapitulatifDeLaDemande", type text}, {"NombreDInterventionsFacturables", Int64.Type}, {"NombreDHeureFacturables", Int64.Type}, {"NombreDeLignesDEChanges", Int64.Type}, {"NombreDOrdreDInterventions", Int64.Type}, {"CalculDeCompteurPointages", Int64.Type}, {"CalculDeCompteurPointageValide", Int64.Type}, {"PrixDuDevis", Int64.Type}, {"TOTALAFACTURER", Currency.Type}, {"DateDeCreAtion_1", type datetime}, {"DatePassageAuStatutEnCours", type datetime}, {"DatePassageAuStatutReSolu", type datetime}, {"TempsDeReSolution", type datetime}, {"ValiderLesPointages", type logical}, {"AffaireCopie", type text}, {"NombreDeFichesDInterventionsFacturables", Int64.Type}, {"TOTALHT", Currency.Type}, {"TOTALTGC", Currency.Type}, {"ManuelOUAutomatique", Int64.Type}, {"DatePassageAuStatutFacture", type datetime}, {"DateDeCreAtion", type datetime}, {"EmailCC", type text}, {"ConcateNationAttribution", type text}, {"NombreAttribueALEnregistrement", Int64.Type}, {"NombreEnregsitre", Int64.Type}, {"Type", type text}, {"Type_1", type text}, {"TestTimeZone", type datetime}, {"QH", Int64.Type}, {"Heures", Int64.Type}, {"NotificationsDeSactiveS", Int64.Type}}),
+		    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"NombreDInterventionsFacturables", "NombreDeLignesDEChanges", "NombreDOrdreDInterventions", "CalculDeCompteurPointages", "CalculDeCompteurPointageValide", "NombreDeFichesDInterventionsFacturables", "AffaireCopie", "ValiderLesPointages", "TempsDeReSolution", "ConcateNationAttribution", "NombreAttribueALEnregistrement", "NombreEnregsitre", "Messagerie", "PrixDuDevis", "DateDInterventionProgrammeEnAttenteDePasse"})
+		in
+		    #"Colonnes supprimées"
+	lineageTag: 973ce2a3-cbe6-4225-8b9b-9d5ab037896a
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Boite_de_reception =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    RePonseTicket_Sheet = Source{[Item="RePonseTicket",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(RePonseTicket_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"RePonseTicket_ID", type text}, {"Objet", type text}, {"De", type text}, {"Le", type datetime}, {"Statut", type text}, {"NombreDEChanges", Int64.Type}, {"MessageDestineAuClient", type text}, {"DemandeDuClient", type text}, {"DateDeRePonse", type date}})
+		in
+		    #"Type modifié"
+	lineageTag: 76d50e16-1f2c-41bf-8da7-6f566daf532a
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Affaires_Codex =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    TEEPEE_AffairesCodex_Sheet = Source{[Item="TEEPEE_AffairesCodex",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(TEEPEE_AffairesCodex_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"TEEPEE_AffairesCodex_ID", type text}, {"WBS_ID", type text}, {"PROJECT_ID", Int64.Type}, {"PROJECT_LONG_DESC", type text}, {"POSITION", type text}, {"PROJECT_TYPE", type text}, {"RECORD_CREATION_DT", type date}, {"WBS_BASIC_START_DT", type date}, {"WBS_BASIC_END_DT", type date}, {"SEGMENT_BUS_AXIS", type text}, {"SEGMENT_BUS_PROC_AXIS", type text}, {"OBJECT_NUM", type text}, {"PROJECT_HIERARCHY_LEVEL", Int64.Type}, {"ACCOUNT_ASSIGN_FLAG", type text}, {"P2_CHANGE_DT", type any}, {"P3_OR_P6_CHANGE_DT", type date}, {"P4_CHANGE_DT", type date}, {"PROJECT_DESC", type text}, {"OSMOSE_CD", Int64.Type}, {"TECH_1", type any}, {"TECH_2", type any}, {"PROJECT_SHORT_DESC", type text}, {"ANALYTICAL_UNIT", Int64.Type}, {"USER_NAME", type text}, {"QUOTE_PRICE", type text}, {"PROJECT_COMMENT", type text}, {"CreationDate", type date}, {"UpdatedDate", type date}}),
+		    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"PROJECT_HIERARCHY_LEVEL", "ACCOUNT_ASSIGN_FLAG", "P2_CHANGE_DT", "P3_OR_P6_CHANGE_DT", "P4_CHANGE_DT", "TECH_1", "TECH_2", "PROJECT_COMMENT"})
+		in
+		    #"Colonnes supprimées"
+	lineageTag: 42e20b50-db6b-41f9-ae0e-0343a2fa481b
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Rôle =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    TEEPEE_ROLE_Sheet = Source{[Item="TEEPEE_ROLE",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(TEEPEE_ROLE_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"TEEPEE_ROLE_ID", type text}, {"nom", type text}, {"droitDeCreerDesModelesDesDonnees", Int64.Type}, {"droitDeFaireDeModifierLeMenu", Int64.Type}, {"droitAuxFiltres", Int64.Type}, {"droitGestionDesLicences", Int64.Type}, {"DroitGestionAdminPlanning", Int64.Type}})
+		in
+		    #"Type modifié"
+	lineageTag: 5785c677-220f-466e-97af-7c0e378aa061
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Technologies =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    TypeDeTicket2_Sheet = Source{[Item="TypeDeTicket2",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(TypeDeTicket2_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"TypeDeTicket2_ID", type text}, {"TypeDeTicket", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: d51bf774-e392-4cf6-ab54-e9e9ff3e519d
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Utilisateurs =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    USER_Sheet = Source{[Item="USER",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(USER_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"USER_ID", type text}, {"nom", type text}, {"prenom", type text}, {"email", type text}, {"AssignLicense", type text}, {"MatriculeCodex", Int64.Type}, {"TeLePhone", type text}, {"Mail", type text}, {"Compteurs", Int64.Type}, {"TauxHorraires", Int64.Type}, {"Astreinte", type text}, {"Signature", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: a687f1d8-72bb-4299-a159-338aac2d8383
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_OI_Utilisateurs_SRC =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_OI,
+		                        client_secret = id_OI_s
+		                    ],
+		                    RelativePath = key_OI
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Technicien(s) po_Sheet" = Source{[Item="Rel_Technicien(s) po",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Technicien(s) po_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"OrdreDInterventionV2_ID", type text}, {"USER_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 02e06397-2e24-4124-b367-1c234551368a
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_OI'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Contacts_Tickets_1 =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Contact demande _Sheet" = Source{[Item="Rel_Contact demande ",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Contact demande _Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Particuliers_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 6c55e348-e1cd-41f6-aad1-c1b557107df2
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Demande_de_devis_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Demande de devis_Sheet" = Source{[Item="Rel_Demande de devis",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Demande de devis_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDeDevisV2_ID", type text}, {"DemandeDAssistanceV2_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: b4eb045c-5c1d-47f5-8ea8-759e93887846
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Devis_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Devis lié au tic_Sheet" = Source{[Item="Rel_Devis lié au tic",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Devis lié au tic_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"DevisV2_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: d9585165-33f8-4786-b9b5-c189b63c2357
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Equipements_IT_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Equipements IT_Sheet" = Source{[Item="Rel_Equipements IT",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Equipements IT_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"EquipementsIT_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 462f4d3e-bfc2-410e-b0d3-f7db4b9e9530
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Etiquettes_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Etiquettes_Sheet = Source{[Item="Rel_Etiquettes",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Etiquettes_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"Etiquettes_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 98df0dfd-0fab-47de-b09f-ebcdfae7517c
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Note_Interne_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Note interne_Sheet" = Source{[Item="Rel_Note interne",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Note interne_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"NoteInterne_ID", type text}, {"DemandeDAssistanceV2_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 82d0d1a3-445e-4791-8ecf-88ab9ab24c11
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_OI_Tickets_SRC =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Ordre d'Interven_Sheet" = Source{[Item="Rel_Ordre d'Interven",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Ordre d'Interven_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"OrdreDInterventionV2_ID", type text}, {"DemandeDAssistanceV2_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 374e92c9-c159-4265-9b05-f7e1c0cea370
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Pointage_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Pointage (2)_Sheet" = Source{[Item="Rel_Pointage (2)",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Pointage (2)_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Pointage_ID", type text}, {"DemandeDAssistanceV2_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 5f26c85a-3330-42d3-af4f-ad9a3df7f915
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Boite_de_reception_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_RePonseTicket_Sheet = Source{[Item="Rel_RePonseTicket",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_RePonseTicket_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"RePonseTicket_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 7aa6c0a5-e90d-4bce-bee7-11b8d329bc6b
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Rôles_Tickets =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_tic,
+		                        client_secret = id_tic_s
+		                    ],
+		                    RelativePath = key_tic
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Rôles_Sheet = Source{[Item="Rel_Rôles",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Rôles_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"DemandeDAssistanceV2_ID", type text}, {"TEEPEE_ROLE_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 84ac881c-4495-41bd-bd3a-0651db1313c1
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Tickets'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'TAB_Demande_d''assistance_(tickets)_TSF' =
+		let
+		    Source = #"TAB_Demande_d'assistance_(tickets)",
+		    #"Colonnes permutées" = Table.ReorderColumns(Source,{"DemandeDAssistanceV2_ID", "ManuelOUAutomatique", "NumeRoDeTicket", "Objet", "ConcateNationObjet", "EMailDuDemandeur", "EmailCC", "Demande", "ReCapitulatifDeLaDemande", "Description", "DernieReJustificationDeMiseEnAttente", "StatutDuTicket", "Type", "Type_1", "DateDeCreAtion_1", "TestTimeZone", "DateDeCreAtion", "DatePassageAuStatutEnCours", "DatePassageAuStatutReSolu", "DatePassageAuStatutFacture", "NombreDHeureFacturables", "TOTALHT", "TOTALTGC", "TOTALAFACTURER"}),
+		    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"ManuelOUAutomatique", "Manuel ou automatique"}, {"NumeRoDeTicket", "Numéro de ticket"}, {"Objet", "Objet / Intitulé"}, {"ConcateNationObjet", "Ticket"}, {"EMailDuDemandeur", "Email Demandeur"}, {"EmailCC", "Email CC"}, {"Demande", "Demande Auto"}, {"ReCapitulatifDeLaDemande", "Demande Manu"}, {"Description", "Description Coordinateur"}, {"DernieReJustificationDeMiseEnAttente", "Dernière justification de mise en attente"}, {"StatutDuTicket", "Statut"}, {"Type", "Catégorie"}, {"Type_1", "Type"}, {"DateDeCreAtion", "Date de création"}, {"DatePassageAuStatutEnCours", "Date passage au statut prise en compte"}, {"DatePassageAuStatutReSolu", "Date passage au statut résolu"}, {"DatePassageAuStatutFacture", "Date passage au statut facturé"}, {"NombreDHeureFacturables", "Nombre heures facturables"}, {"TOTALAFACTURER", "Total TTC"}, {"TOTALHT", "Total HT"}, {"TOTALTGC", "Total TGC"}, {"DateDeCreAtion_1", "Date de création M"}, {"TestTimeZone", "Date de création A"}, {"NotificationsDeSactiveS", "Notifications désactivées"}}),
+		    #"Lignes triées / numéro de ticket desc" = Table.Sort(#"Colonnes renommées",{{"Numéro de ticket", Order.Descending}}),
+		    #"Trsf col - Manu OU Auto" = Table.TransformColumns(
+		    #"Lignes triées / numéro de ticket desc",
+		    {{"Manuel ou automatique",
+		        each if _ = 1 then "Automatique"
+		        else if _ = 0 then "Manuel"
+		        else null,
+		        type text
+		    }}
+		),
+		    #"Philtre ""Vide"" - col Manu ou auto" = Table.SelectRows(#"Trsf col - Manu OU Auto", each ([Manuel ou automatique] <> null)),
+		    #"Trsf col - Statut" = Table.TransformColumns(
+		    #"Philtre ""Vide"" - col Manu ou auto",
+		    {{"Statut",
+		        each if _ = "Nouveau" then "Nouveau"
+		        else if _ = "InterventionProgramme" then "Intervention Programmée"
+		        else if _ = "ReSolu" then "Résolu"
+		        else if _ = "EnCours" then "Prise en compte"
+		        else if _ = "EnAttente" then "En attente"
+		        else if _ = "Annule" then "Annulé"
+		        else if _ = "AFacture" then "A Facturé"
+		        else if _ = "Facture" then "Facturé"
+		        else null,
+		        type text
+		    }}
+		),
+		    #"New Col - Demande" = Table.AddColumn(#"Trsf col - Statut", "Demande", each if [Manuel ou automatique] = "Manuel" then [Demande Manu] else if [Manuel ou automatique] = "Automatique" then [Demande Auto] else null),
+		    #"Colonnes ""Demande"" Permuté" = Table.ReorderColumns(#"New Col - Demande",{"DemandeDAssistanceV2_ID", "Manuel ou automatique", "Numéro de ticket", "Objet / Intitulé", "Ticket", "Email Demandeur", "Email CC", "Demande Auto", "Demande Manu", "Demande", "Description Coordinateur", "Dernière justification de mise en attente", "Statut", "Catégorie", "Type", "Date de création M", "Date de création", "Date passage au statut prise en compte", "Date passage au statut résolu", "Date passage au statut facturé", "Nombre heures facturables", "Total HT", "Total TGC", "Total TTC"}),
+		    #"Type 'Demande' -> Texte" = Table.TransformColumnTypes(#"Colonnes ""Demande"" Permuté",{{"Demande", type text}}),
+		    #"Trsf col - Catégorie" = Table.TransformColumns(
+		    #"Type 'Demande' -> Texte",
+		    {{"Catégorie",
+		        each if _ = "NOUVELLEDEMANDE" then "NOUVELLE DEMANDE"
+		        else if _ = "BUILD" then "BUILD"
+		        else if _ = "RUN" then "RUN"
+		        else if _ = "INFOGERANCE" then "INFOGERANCE"
+		        else if _ = "BUSINESS" then "BUSINESS"
+		        else if _ = "SERVICES" then "SERVICES"
+		        else if _ = "CONGESFERIEMALADIE" then "CONGES / FERIE / MALADIE"
+		        else null ,
+		        type text
+		    }}
+		),
+		    Jointure_Entreprise = Table.NestedJoin(#"Trsf col - Catégorie", {"DemandeDAssistanceV2_ID"}, REL_Entreprises_Tickets, {"DemandeDAssistanceV2_ID"}, "REL_Entreprises_Tickets", JoinKind.LeftOuter),
+		    Expand_ID_Entreprise = Table.ExpandTableColumn(Jointure_Entreprise, "REL_Entreprises_Tickets", {"Entreprise_ID"}, {"REL_Entreprises_Tickets.Entreprise_ID"}),
+		    Jointure_Sites = Table.NestedJoin(Expand_ID_Entreprise, {"DemandeDAssistanceV2_ID"}, REL_Sites_Concerné_Tickets, {"DemandeDAssistanceV2_ID"}, "REL_Sites_Concerné_Tickets", JoinKind.LeftOuter),
+		    Expand_ID_Sites = Table.ExpandTableColumn(Jointure_Sites, "REL_Sites_Concerné_Tickets", {"Clients_ID"}, {"REL_Sites_Concerné_Tickets.Clients_ID"}),
+		    Jointure_Priorité = Table.NestedJoin(Expand_ID_Sites, {"DemandeDAssistanceV2_ID"}, REL_Priorité_Tickets, {"DemandeDAssistanceV2_ID"}, "REL_Priorité_Tickets", JoinKind.LeftOuter),
+		    Expand_Priorité = Table.ExpandTableColumn(Jointure_Priorité, "REL_Priorité_Tickets", {"TAB_Priorité.Priorite"}, {"REL_Priorité_Tickets.TAB_Priorité.Priorite"}),
+		    #"Jointure Affaire" = Table.NestedJoin(Expand_Priorité, {"DemandeDAssistanceV2_ID"}, REL_Affaire_Tickets, {"DemandeDAssistanceV2_ID"}, "REL_Affaire_Tickets", JoinKind.LeftOuter),
+		    Expand_Affaire = Table.ExpandTableColumn(#"Jointure Affaire", "REL_Affaire_Tickets", {"TEEPEE_AffairesCodex_ID"}, {"REL_Affaire_Tickets.TEEPEE_AffairesCodex_ID"}),
+		    #"Duplication - Date de création" = Table.DuplicateColumn(Expand_Affaire, "Date de création", "Date de création - Copier"),
+		    #"Type - Date de création - Date" = Table.TransformColumnTypes(#"Duplication - Date de création",{{"Date de création - Copier", type date}}),
+		    #"Trsf col - Priorité" = Table.TransformColumns(
+		    #"Type - Date de création - Date",
+		    {{"REL_Priorité_Tickets.TAB_Priorité.Priorite",
+		        each if _ = "1 - Majeur 🔴" then "Majeur"
+		        else if _ = "2 - Mineur 🟠" then "Mineur"
+		        else if _ = "3 - Non urgent 🟢" then "Non urgent"
+		        else null,
+		        type text
+		    }}
+		),
+		    Jointure_Contrats = Table.NestedJoin(#"Trsf col - Priorité", {"DemandeDAssistanceV2_ID"}, REL_Contrat_Tickets, {"DemandeDAssistanceV2_ID"}, "REL_Contrat_Tickets", JoinKind.LeftOuter),
+		    Expand_ID_Contrat = Table.ExpandTableColumn(Jointure_Contrats, "REL_Contrat_Tickets", {"Contrats_ID"}, {"REL_Contrat_Tickets.Contrats_ID"})
+		in
+		    Expand_ID_Contrat
+	lineageTag: e456bac4-3268-4179-80ec-8b6184669492
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'TAB_Ordres_d''Interventions_TSF' =
+		let
+		    Source = #"TAB_Ordres_d'Interventions",
+		    #"Colonnes permutées" = Table.ReorderColumns(Source,{"OrdreDInterventionV2_ID", "OrdreDInterventionOI", "TypeDIntervention", "DateDeCreAtion", "DateEtHeureDeCompteRendu", "DateEtHeureDeDeButDIntervention", "DateEtHeureFinDIntervention", "Commentaires", "StatutDeLOI", "CompteRenduClient", "SousContrat", "StatutAttachementSigne", "InterventionAReAliser", "InterventionSurSiteOuADistance", "StatutDeSignatureClient", "SignataireTechnicien", "SignataireClient", "JustificationDeMiseEnAttente", "11EncombrementDuLocal", "Observation11", "12ClimatisationDuLocal", "Observation12", "OpeRationDeControLeReAliseEs", "21ConnexionMachineNModem", "Observation21", "22VersionDeLaMachineEtPatchsInstalleS", "Observation22", "23SauvegardeDeLaBaseDeDonneEs", "Observation23", "24LectureHistoriqueAlarmesEtIncidents", "Observation24", "25PosteOpeRateurStandardOuPOPC", "Observation25", "26Heure", "Observation26", "27GuidesParlantsEtMusiqueDAttente", "Observation27", "28TestDeRemonteEsDAlarmesEtIncidents", "Observation28", "29LiensOpeRateursEtLiensIP", "Observation29", "210LienIP", "Observation210", "31ControLeDeLEnvironnement", "Observation31", "32ControLeDeMeCanismeDesConnexions", "Observations32", "33ControLeVisuelDesBatteries", "Observation33", "5Minutes", "15Minutes", "30Minutes", "45Minutes", "60Minutes", "Observation34", "41MessagerieVocale", "Observation41", "42Taxation", "Observation42", "43CentreDeGestion", "Observation43", "44ServeurACD", "Observation44", "45Passerelles", "Observation45", "46SeCurisation", "Observation46", "Facturation", "TOTALSommeArticlesSortants", "TOTALHeuresTravailleEs", "TOTALPrestationsHT", "TOTALMateRielsHT", "TOTALMontantHT_1", "TOTALTGC_1", "TOTALTTC"}),
+		    #"Colonnes renommées" = Table.RenameColumns(#"Colonnes permutées",{{"OrdreDInterventionOI", "Numéro d'OI"}, {"TypeDIntervention", "Type"}, {"DateDeCreAtion", "Date de création"}, {"DateEtHeureDeDeButDIntervention", "Date & heure début (prévisionnel)"}, {"DateEtHeureFinDIntervention", "Date & heure fin (prévisionnel)"}, {"StatutDeLOI", "Statut"}, {"CompteRenduClient", "Compte rendu"}, {"SousContrat", "Sous Contrat"}, {"StatutAttachementSigne", "Statut signature attachement"}, {"InterventionAReAliser", "Intervention à réaliser (site/distance)"}, {"InterventionSurSiteOuADistance", "Intervention réaliser (site/distance)"}, {"StatutDeSignatureClient", "Statut signature"}, {"SignataireTechnicien", "Signataire Technicien"}, {"SignataireClient", "Signataire Client"}, {"DateEtHeureDeCompteRendu", "Date & heure de compte rendu"}, {"JustificationDeMiseEnAttente", "Justification ""en attente"""}, {"11EncombrementDuLocal", "1.1 Encombrement du local"}, {"Observation11", "Observation 1.1"}, {"12ClimatisationDuLocal", "1.2 Climatisation du local"}, {"Observation12", "Observation 1.2"}, {"OpeRationDeControLeReAliseEs", "Operation de contrôles réalisées (site / distance)"}, {"21ConnexionMachineNModem", "2.1 Connexion machine / n° modem"}, {"Observation21", "Observation 2.1"}, {"22VersionDeLaMachineEtPatchsInstalleS", "2.2 Version de la machine et patchs installes"}, {"Observation22", "Observation 2.2"}, {"23SauvegardeDeLaBaseDeDonneEs", "2.3 Sauvegarde de la base de données"}, {"Observation23", "Observation 2.3"}, {"24LectureHistoriqueAlarmesEtIncidents", "2.4 Lecture historique alarmes et incidents"}, {"Observation24", "Observation 2.4"}, {"25PosteOpeRateurStandardOuPOPC", "2.5 Poste Operateur (standard ou POPC)"}, {"Observation25", "Observation 2.5"}, {"26Heure", "2.6 Heure"}, {"Observation26", "Observation 2.6"}, {"27GuidesParlantsEtMusiqueDAttente", "2.7 Guides parlants et musique d'attente"}, {"Observation27", "Observation 2.7"}, {"28TestDeRemonteEsDAlarmesEtIncidents", "2.8 Test de remontées d'Alarmes et incidents"}, {"Observation28", "Observation 2.8"}, {"29LiensOpeRateursEtLiensIP", "2.9 Liens Operateurs (OPT)"}, {"Observation29", "Observation 2.9"}, {"210LienIP", "2.10 Lien IP"}, {"Observation210", "Observation 2.10"}, {"31ControLeDeLEnvironnement", "3.1 Controle de l'environnement"}, {"Observation31", "Observation 3.1"}, {"32ControLeDeMeCanismeDesConnexions", "3.2 Controle de meaanisme des connexions"}, {"Observations32", "Observations 3.2"}, {"33ControLeVisuelDesBatteries", "3.3 Controle visuel des batteries"}, {"Observation33", "Observation 3.3"}, {"5Minutes", "5 Minutes"}, {"15Minutes", "15 Minutes"}, {"30Minutes", "30 Minutes"}, {"45Minutes", "45 Minutes"}, {"60Minutes", "60 Minutes"}, {"Observation34", "Observation 3.4"}, {"41MessagerieVocale", "4.1 Messagerie vocale"}, {"Observation41", "Observation 4.1"}, {"42Taxation", "4.2 taxation"}, {"Observation42", "Observation 4.2"}, {"43CentreDeGestion", "4.3 Centre de gestion"}, {"Observation43", "Observation 4.3"}, {"44ServeurACD", "4.4 Serveur ACD"}, {"Observation44", "Observation 4.4"}, {"45Passerelles", "4.5 Passerelles"}, {"Observation45", "Observation 4.5"}, {"46SeCurisation", "4.6 Securisation"}, {"Observation46", "Observation 4.6"}, {"TOTALSommeArticlesSortants", "Nbr d'articles"}, {"TOTALHeuresTravailleEs", "TOTAL heures réalisées"}, {"TOTALPrestationsHT", "TOTAL Prestation HT"}, {"TOTALMateRielsHT", "TOTAL Materiels HT"}, {"TOTALMontantHT_1", "TOTAL HT"}, {"TOTALTGC_1", "TOTAL TGC"}, {"TOTALTTC", "TOTAL TTC"}, {"Commentaires", "Commentaires"}}),
+		    #"Trsf - Col Statut" = Table.TransformColumns(
+		    #"Colonnes renommées",
+		    {{"Statut",
+		        each if _ = "ReSolu" then "Résolu"
+		        else if _ = "AFaire" then "A faire"
+		        else if _ = "EnAttente" then "En attente"
+		        else if _ = "PrePlanifie" then "Préplanifié"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Col Sous contrat" = Table.TransformColumns(
+		    #"Trsf - Col Statut",
+		    {{"Sous Contrat",
+		        each if _ = 1 then "Sous contrat"
+		        else if _ = 0 then "Hors contrat"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Statut signature attach" = Table.TransformColumns(
+		    #"Trsf - Col Sous contrat",
+		    {{"Statut signature attachement",
+		        each if _ = "NonSigneE" then "Non signée"
+		        else if _ = "SigneE" then "Signé"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Intervention à réaliser (site/distance)" = Table.TransformColumns(
+		    #"Trsf - Statut signature attach",
+		    {{"Intervention à réaliser (site/distance)",
+		        each if _ = "SurSite" then "Sur site"
+		        else if _ = "ADistance" then "A distance"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Intervention réaliser (site/distance)" = Table.TransformColumns(
+		    #"Trsf - Intervention à réaliser (site/distance)",
+		    {{"Intervention réaliser (site/distance)",
+		        each if _ = "SurSite" then "Sur site"
+		        else if _ = "ADistance" then "A distance"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Statut signature" = Table.TransformColumns(
+		    #"Trsf - Intervention réaliser (site/distance)",
+		    {{"Statut signature",
+		        each if _ = "NonSigneE" then "Non signée"
+		        else if _ = "SigneE" then "Signée"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Operation de contrôles réalisées (site / distance)" = Table.TransformColumns(
+		    #"Trsf - Statut signature",
+		    {{"Operation de contrôles réalisées (site / distance)",
+		        each if _ = "SurSite" then "Sur site"
+		        else if _ = "ADistance" then "A distance"
+		        else null ,
+		        type text
+		    }}
+		),
+		    #"Trsf - Facturation" = Table.TransformColumns(
+		    #"Trsf - Operation de contrôles réalisées (site / distance)",
+		    {{"Facturation",
+		        each if _ = "NonFacturable" then "Non facturable"
+		        else if _ = "Facturable" then "Facturable"
+		        else null ,
+		        type text
+		    }}
+		),
+		    Jointure_Tickets = Table.NestedJoin(#"Trsf - Facturation", {"OrdreDInterventionV2_ID"}, REL_OI_Tickets_SRC, {"OrdreDInterventionV2_ID"}, "REL_OI_Tickets_SRC", JoinKind.LeftOuter),
+		    Expand_ID_Ticket = Table.ExpandTableColumn(Jointure_Tickets, "REL_OI_Tickets_SRC", {"DemandeDAssistanceV2_ID"}, {"REL_OI_Tickets_SRC.DemandeDAssistanceV2_ID"})
+		in
+		    Expand_ID_Ticket
+	lineageTag: 09e741cf-9e89-4810-b436-a2c3787f341f
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Entreprises_TSF =
+		let
+		    Source = TAB_Entreprises,
+		    #"Colonnes renommées" = Table.RenameColumns(Source,{{"NomDeLEntreprise", "Entreprise"}, {"NumeRoClient", "Numéro Client"}})
+		in
+		    #"Colonnes renommées"
+	lineageTag: 99d5b196-d11a-4dac-873b-fbcd5b202da7
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Sites_TSF =
+		let
+		    Source = TAB_Sites,
+		    #"Colonnes renommées" = Table.RenameColumns(Source,{{"IDIncreMente", "ID_Incrémentée"}, {"Telephone", "Téléphone"}, {"NomDuSite", "Nom du site"}}),
+		    #"Colonnes permutées" = Table.ReorderColumns(#"Colonnes renommées",{"Clients_ID", "ID_Incrémentée", "Nom du site", "Email", "Téléphone", "Adresse"})
+		in
+		    #"Colonnes permutées"
+	lineageTag: 42fbb2e7-6f22-473f-b4a8-8b986be441b0
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Contacts_TSF =
+		let
+		    Source = TAB_Contacts
+		in
+		    Source
+	lineageTag: af31331b-2b57-4bcf-895c-5d591ca11178
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Pointage_Ticket =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ptg,
+		                        client_secret = id_ptg_s
+		                    ],
+		                    RelativePath = key_ptg
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_R Utilisateur V _Sheet" = Source{[Item="Rel_R Utilisateur V ",Kind="Sheet"]}[Data]
+		in
+		    #"Rel_R Utilisateur V _Sheet"
+	lineageTag: 25fcf3af-06f0-4f9f-ae8a-3be3e4d00013
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Pointages'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_OI_Entreprise =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_OI,
+		                        client_secret = id_OI_s
+		                    ],
+		                    RelativePath = key_OI
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Entreprise_Sheet = Source{[Item="Rel_Entreprise",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Entreprise_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"OrdreDInterventionV2_ID", type text}, {"Entreprise_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: aefcf1b7-a188-44f0-bce0-0dc909652b88
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_OI'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_OI_Site =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_OI,
+		                        client_secret = id_OI_s
+		                    ],
+		                    RelativePath = key_OI
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    #"Rel_Site Concerné_Sheet" = Source{[Item="Rel_Site Concerné",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(#"Rel_Site Concerné_Sheet", [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"OrdreDInterventionV2_ID", type text}, {"Clients_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 175f4798-e4ba-4f32-b89a-a8f6ca37d419
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_OI'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Contrats_TSF =
+		let
+		    Source = TAB_Contrats,
+		    #"Requêtes fusionnées" = Table.NestedJoin(Source, {"Contrats_ID"}, REL_Contrats_Entreprises, {"Contrats_ID"}, "REL_Contrats_Entreprises", JoinKind.LeftOuter),
+		    JOIN_REL_Entreprises = Table.NestedJoin(#"Requêtes fusionnées", {"Contrats_ID"}, REL_Contrats_Entreprises, {"Contrats_ID"}, "REL_Contrats_Entreprises.1", JoinKind.LeftOuter),
+		    Expand_ID_Entreprises = Table.ExpandTableColumn(JOIN_REL_Entreprises, "REL_Contrats_Entreprises.1", {"Entreprise_ID"}, {"REL_Contrats_Entreprises.1.Entreprise_ID"}),
+		    JOIN_TAB_Entreprise = Table.NestedJoin(Expand_ID_Entreprises, {"REL_Contrats_Entreprises.1.Entreprise_ID"}, TAB_Entreprises, {"Entreprise_ID"}, "TAB_Entreprises", JoinKind.LeftOuter),
+		    Expand_Nom_Entreprise = Table.ExpandTableColumn(JOIN_TAB_Entreprise, "TAB_Entreprises", {"NomDeLEntreprise"}, {"TAB_Entreprises.NomDeLEntreprise"}),
+		    #"Fusion - Référence" = Table.AddColumn(Expand_Nom_Entreprise, "Référence", each Text.Combine({Text.From([NumeRoDeContrat], "fr-FR"), [NomDuContrat], [Statut]}, " - "), type text),
+		    #"Colonnes renommées" = Table.RenameColumns(#"Fusion - Référence",{{"NomDuContrat", "Référence Contrat"}, {"NumeRoDeContrat", "Numéro"}, {"DateDeSignature", "Date de prise d'effet"}, {"DureE", "Durée"}, {"NombreEnJours", "Nbr en jours (si autre)"}, {"DateDePreAvis", "Date de préavis"}, {"DateDeFinDuContrat_1", "Date fin de contrat"}, {"DateDeCreAtion", "Date de création"}, {"QuotaDHeuresAn", "Quota d'heures / an"}, {"QuotaDHeuresAnConsommeE", "Quota d'Heures / An consommée"}, {"TAB_Entreprises.NomDeLEntreprise", "Entreprise"}})
+		in
+		    #"Colonnes renommées"
+	lineageTag: a551bb97-09e2-4e89-a4a0-44944f0ee72b
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression key_ctr = "<A_RENSEIGNER_KEY_CTR>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: ef5e9ce0-7db4-445e-8203-4673a7a0809b
+	queryGroup: 'API Safeplace\00_Paramètres\Key'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_ctr_s = "<A_RENSEIGNER_ID_CTR_S>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 66b4fbe1-26fc-4e6a-9fba-0f47b8ac6f59
+	queryGroup: 'API Safeplace\00_Paramètres\Client_secret'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_ctr = "<A_RENSEIGNER_ID_CTR>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 256f39ae-9f64-4056-92e4-7e99eeb3ddbe
+	queryGroup: 'API Safeplace\00_Paramètres\Client_id'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression REL_Contrats_Entreprises =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ctr,
+		                        client_secret = id_ctr_s
+		                    ],
+		                    RelativePath = key_ctr
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Entreprise_Sheet = Source{[Item="Rel_Entreprise",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Entreprise_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Contrats_ID", type text}, {"Entreprise_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 5a4a1fea-ce91-429a-823d-575974b3be5f
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Contrats'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_Utilisateurs_Tickets =
+		let
+		    Source = REL_Utilisateurs_Tickets_SRC
+		in
+		    Source
+	lineageTag: fbf0ff75-fa56-4012-8d9d-4bfd8aeaafb3
+	queryGroup: 'API Safeplace\03_Model\RELATIONS'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Erreurs dans DIM_Utilisateurs' =
+		let
+		Source = DIM_Utilisateurs,
+		  #"Incompatibilités de types détectées" = let
+		    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),
+		    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),
+		    fieldNames = Record.FieldNames(recordTypeFields),
+		    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),
+		    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = "Le type de la valeur ne correspond pas à celui de la colonne.", Detail = v], fieldTypes{i}})
+		in
+		    Table.TransformColumns(Source, pairs),
+		  #"Index ajouté" = Table.AddIndexColumn(#"Incompatibilités de types détectées", "Numéro de ligne" ,1),
+		  #"Colonnes permutées" = Table.ReorderColumns(#"Index ajouté", {"Numéro de ligne", "USER_ID", "NOM", "Prénom", "NOM, Prénom", "Téléphone", "Courriel VINCI", "Courriel professionnel", "Matricule Codex", "Taux Horraires", "Licence", "Astreinte"})
+		in
+		  #"Colonnes permutées"
+	lineageTag: b19f0343-c677-4a97-ac92-378febe240b7
+	queryGroup: 'Erreurs des requêtes – 30/09/2026 07:33:53'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression key_ctp = "<A_RENSEIGNER_KEY_CTP>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 6cbc8f47-c3bd-412c-91f5-09cc31e4f2ba
+	queryGroup: 'API Safeplace\00_Paramètres\Key'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_ctp = "<A_RENSEIGNER_ID_CTP>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 2efba46c-9fae-4e12-a0cb-fae66386494d
+	queryGroup: 'API Safeplace\00_Paramètres\Client_id'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression id_ctp_s = "<A_RENSEIGNER_ID_CTP_S>" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 84070840-4a26-4c54-8fda-87acb82faee7
+	queryGroup: 'API Safeplace\00_Paramètres\Client_secret'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression TAB_Contrats_TechPack_TSF =
+		let
+		    Source = TAB_Contrats_TechPack,
+		    #"Colonnes renommées" = Table.RenameColumns(Source,{{"NombreDeTechPack", "Nbr_TechPack"}, {"ParameTreTechPackEnH", "Paramètre (en h)"}, {"DateDeCreAtion", "Date_creation"}, {"DateDeValiditeDuTechPack", "Date_validité"}, {"DateDeFinDeValidite", "Date_fin_validité"}, {"DateHeureDeCreAtion", "Date & heure de création"}, {"IDEntreprise", "ID_Entreprise"}}),
+		    #"Multiplication insérée" = Table.AddColumn(#"Colonnes renommées", "Multiplication", each List.Product({[#"Paramètre (en h)"], [Nbr_TechPack]}), Int64.Type),
+		    #"Colonnes permutées" = Table.ReorderColumns(#"Multiplication insérée",{"ContratSimplifieTechPack_ID", "ID", "ID_Entreprise", "Nbr_TechPack", "Paramètre (en h)", "Multiplication", "Compteur", "Date_validité", "Date_fin_validité", "Date_creation", "Date & heure de création"}),
+		    #"Requêtes fusionnées" = Table.NestedJoin(#"Colonnes permutées", {"ContratSimplifieTechPack_ID"}, REL_TP_Entreprise, {"ContratSimplifieTechPack_ID"}, "REL_TP_Entreprise", JoinKind.LeftOuter),
+		    #"REL_TP_Entreprise développé" = Table.ExpandTableColumn(#"Requêtes fusionnées", "REL_TP_Entreprise", {"Entreprise_ID"}, {"REL_TP_Entreprise.Entreprise_ID"}),
+		    #"Colonnes renommées1" = Table.RenameColumns(#"REL_TP_Entreprise développé",{{"Multiplication", "Heures"}}),
+		    #"Requêtes fusionnées1" = Table.NestedJoin(#"Colonnes renommées1", {"REL_TP_Entreprise.Entreprise_ID"}, TAB_Entreprises_TSF, {"Entreprise_ID"}, "TAB_Entreprises_TSF", JoinKind.LeftOuter),
+		    #"TAB_Entreprises_TSF développé" = Table.ExpandTableColumn(#"Requêtes fusionnées1", "TAB_Entreprises_TSF", {"Entreprise"}, {"TAB_Entreprises_TSF.Entreprise"}),
+		    #"Colonnes renommées2" = Table.RenameColumns(#"TAB_Entreprises_TSF développé",{{"TAB_Entreprises_TSF.Entreprise", "Entreprise"}}),
+		    #"Type modifié" = Table.TransformColumnTypes(#"Colonnes renommées2",{{"Heures", Int64.Type}})
+		in
+		    #"Type modifié"
+	lineageTag: d2871832-5f26-4317-86ff-e76da22733ff
+	queryGroup: 'API Safeplace\02_Transformées'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression TAB_Contrats_TechPack =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ctp,
+		                        client_secret = id_ctp_s
+		                    ],
+		                    RelativePath = key_ctp
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    ContratSimplifieTech_Sheet = Source{[Item="ContratSimplifieTech",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(ContratSimplifieTech_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"ContratSimplifieTechPack_ID", type text}, {"NombreDeTechPack", Int64.Type}, {"ParameTreTechPackEnH", Int64.Type}, {"ID", Int64.Type}, {"Compteur", Int64.Type}, {"DateDeCreAtion", type date}, {"DateDeValiditeDuTechPack", type date}, {"DateDeFinDeValidite", type date}, {"DateHeureDeCreAtion", type datetime}, {"IDEntreprise", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 5938fde9-d4d9-405d-924a-36ff9e4c7ae3
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Contrats_TP'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression REL_TP_Entreprise =
+		let
+		    Source = Excel.Workbook(
+		            Web.Contents(
+		                url,
+		                [
+		                    Headers = [
+		                        client_id = id_ctp,
+		                        client_secret = id_ctp_s
+		                    ],
+		                    RelativePath = key_ctp
+		                ]
+		            ),
+		            null,
+		            true
+		        ),
+		    Rel_Entreprise_Sheet = Source{[Item="Rel_Entreprise",Kind="Sheet"]}[Data],
+		    #"En-têtes promus" = Table.PromoteHeaders(Rel_Entreprise_Sheet, [PromoteAllScalars=true]),
+		    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"ContratSimplifieTechPack_ID", type text}, {"Entreprise_ID", type text}})
+		in
+		    #"Type modifié"
+	lineageTag: 8a6e2923-22b4-4333-9a14-77414223e3a6
+	queryGroup: 'API Safeplace\01_Sources_API\SRC_Contrats_TP'
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

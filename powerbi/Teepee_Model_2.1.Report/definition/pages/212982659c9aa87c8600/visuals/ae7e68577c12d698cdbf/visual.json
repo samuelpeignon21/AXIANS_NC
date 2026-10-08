@@ -1,0 +1,730 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.10.0/schema.json",
+  "name": "ae7e68577c12d698cdbf",
+  "position": {
+    "x": 0,
+    "y": 156.35179153094464,
+    "z": 3000,
+    "height": 562.86644951140067,
+    "width": 839.08794788273622,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_TechPack"
+                    }
+                  },
+                  "Property": "ID"
+                }
+              },
+              "queryRef": "DIM_TechPack.ID",
+              "nativeQueryRef": "ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_TechPack"
+                    }
+                  },
+                  "Property": "Entreprise"
+                }
+              },
+              "queryRef": "DIM_TechPack.TAB_Entreprises_TSF.Entreprise",
+              "nativeQueryRef": "Entreprise"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_TechPack"
+                    }
+                  },
+                  "Property": "Nbr_TechPack"
+                }
+              },
+              "queryRef": "DIM_TechPack.Nbr_TechPack",
+              "nativeQueryRef": "Nombre",
+              "displayName": "Nombre"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_TechPack"
+                    }
+                  },
+                  "Property": "Paramètre (en h)"
+                }
+              },
+              "queryRef": "DIM_TechPack.Paramètre (en h)",
+              "nativeQueryRef": "Paramètre (en h)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_TechPack"
+                    }
+                  },
+                  "Property": "Date_validité"
+                }
+              },
+              "queryRef": "DIM_TechPack.Date_validité",
+              "nativeQueryRef": "Date début validité",
+              "displayName": "Date début validité"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DIM_TechPack"
+                    }
+                  },
+                  "Property": "Date_fin_validité"
+                }
+              },
+              "queryRef": "DIM_TechPack.Date_fin_validité",
+              "nativeQueryRef": "Date fin validité",
+              "displayName": "Date fin validité"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "DIM_TechPack"
+                        }
+                      },
+                      "Property": "Heures"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "DIM_TechPack.Heures",
+              "nativeQueryRef": "Somme de Heures",
+              "displayName": "TechPack"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Heures consommées TechPack"
+                }
+              },
+              "queryRef": "Mesures.Heures consommées TechPack",
+              "nativeQueryRef": "Consommée",
+              "displayName": "Consommée"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Solde Heures TechPack"
+                }
+              },
+              "queryRef": "Mesures.Solde Heures TechPack",
+              "nativeQueryRef": "Restant",
+              "displayName": "Restant"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "%_solde_TP_restant"
+                }
+              },
+              "queryRef": "Mesures.%_solde_TP_restant",
+              "nativeQueryRef": "% Solde restant",
+              "displayName": "% Solde restant"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Statut TP"
+                }
+              },
+              "queryRef": "Mesures.Statut TP",
+              "nativeQueryRef": "Statut TP"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "DIM_TechPack"
+                  }
+                },
+                "Property": "ID"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "gridHorizontal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "gridHorizontalColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": -0.5
+                    }
+                  }
+                }
+              }
+            },
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'wf_standard-font, helvetica, arial, sans-serif'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 0,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "Mesures"
+                                    }
+                                  },
+                                  "Property": "Statut TP"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "'CRITIQUE'"
+                                }
+                              }
+                            },
+                            "Annotations": {
+                              "PowerBI.SQExprEvaluationKind": 1,
+                              "PowerBI.SQExprTextOperatorOption": 2
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#D64550'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 0,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "Mesures"
+                                    }
+                                  },
+                                  "Property": "Statut TP"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "'VIGILANCE'"
+                                }
+                              }
+                            },
+                            "Annotations": {
+                              "PowerBI.SQExprEvaluationKind": 1,
+                              "PowerBI.SQExprTextOperatorOption": 2
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#E66C37'"
+                            }
+                          }
+                        },
+                        {
+                          "Condition": {
+                            "Comparison": {
+                              "ComparisonKind": 0,
+                              "Left": {
+                                "Measure": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Entity": "Mesures"
+                                    }
+                                  },
+                                  "Property": "Statut TP"
+                                }
+                              },
+                              "Right": {
+                                "Literal": {
+                                  "Value": "'OK'"
+                                }
+                              }
+                            },
+                            "Annotations": {
+                              "PowerBI.SQExprEvaluationKind": 1,
+                              "PowerBI.SQExprTextOperatorOption": 2
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#E9FFDE'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "Mesures.Statut TP"
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "72.53391306894473D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_TechPack.Nbr_TechPack"
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "DIM_TechPack.Heures"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "73.86499912856816D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_TechPack.Paramètre (en h)"
+          }
+        },
+        {
+          "properties": {},
+          "selector": {
+            "metadata": "Mesures.Solde Heures TechPack"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "139.2052136642434D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_TechPack.TAB_Entreprises_TSF.Entreprise"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77.05410561792708D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_TechPack.Date_fin_validité"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "79.77198697068404D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "DIM_TechPack.Date_validité"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "83.49185336183851D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Mesures.%_solde_TP_restant"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "81.08584247222184D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Mesures.Heures consommées TechPack"
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "dataBars": {
+              "minValue": {
+                "expr": {
+                  "Literal": {
+                    "Value": "0D"
+                  }
+                }
+              },
+              "maxValue": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1D"
+                  }
+                }
+              },
+              "positiveColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#41a4ff'"
+                      }
+                    }
+                  }
+                }
+              },
+              "negativeColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#efb5b9'"
+                      }
+                    }
+                  }
+                }
+              },
+              "axisColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'foreground'"
+                      }
+                    }
+                  }
+                }
+              },
+              "reverseDirection": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "hideText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "totalMatchingOption": {
+                "expr": {
+                  "Literal": {
+                    "Value": "1L"
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Mesures.%_solde_TP_restant"
+          }
+        },
+        {
+          "properties": {
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Mesures.Statut TP"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'AlternatingRowsNew'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "section": {
+              "expr": {
+                "Literal": {
+                  "Value": "'e064abe760abc73c2b30'"
+                }
+              }
+            },
+            "showValuesInBold": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showTooltipFieldsOnly": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showSentenceFormat": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "showActionsInTooltips": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "cb25288b77e788ba0569",
+        "field": {
+          "Arithmetic": {
+            "Left": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Mesures"
+                  }
+                },
+                "Property": "%_Solde Heure TP"
+              }
+            },
+            "Right": {
+              "ScopedEval": {
+                "Expression": {
+                  "Measure": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "Mesures"
+                      }
+                    },
+                    "Property": "%_Solde Heure TP"
+                  }
+                },
+                "Scope": []
+              }
+            },
+            "Operator": 3
+          }
+        },
+        "type": "Advanced",
+        "howCreated": "User"
+      }
+    ]
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "212982659c9aa87c8600",
+  "displayName": "Suivi du TechPack Générale",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "17574b5819cf8c431fa4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "DIM_Tickets"
+              }
+            },
+            "Property": "TP"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "DIM_Tickets",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "d"
+                              }
+                            },
+                            "Property": "TP"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "'0'"
+                            }
+                          }
+                        ],
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "User",
+        "isHiddenInViewMode": true,
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "5ec374b68b9107b35839",
+    "type": "Default",
+    "parameters": [],
+    "acceptsFilterContext": "None"
+  },
+  "objects": {
+    "outspacePane": [
+      {
+        "properties": {
+          "width": {
+            "expr": {
+              "Literal": {
+                "Value": "223L"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "ae7e68577c12d698cdbf",
+      "target": "22e64a8e5f8e5f3034e5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f14404a95e0054427d4",
+      "target": "ae7e68577c12d698cdbf",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f14404a95e0054427d4",
+      "target": "22e64a8e5f8e5f3034e5",
+      "type": "NoFilter"
+    },
+    {
+      "source": "4f14404a95e0054427d4",
+      "target": "21e40f9dd14249e4e16c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "ae7e68577c12d698cdbf",
+      "target": "4f14404a95e0054427d4",
+      "type": "NoFilter"
+    }
+  ]
+}

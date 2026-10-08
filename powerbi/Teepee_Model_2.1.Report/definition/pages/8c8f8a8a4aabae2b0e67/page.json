@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "8c8f8a8a4aabae2b0e67",
+  "displayName": "Info-Bulle Entreprise",
+  "displayOption": "ActualSize",
+  "height": 500,
+  "width": 400,
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}

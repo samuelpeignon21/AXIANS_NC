@@ -1,0 +1,9 @@
+# Power BI (PBIP) - fichiers locaux / cache de données
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+**/.pbi/unappliedChanges.json
+*.pbix
+*.pbit
+# Divers
+.DS_Store
+Thumbs.db

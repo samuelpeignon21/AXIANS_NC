@@ -1,0 +1,726 @@
+table 'FACT_Ordres_d''Interventions'
+	lineageTag: 7f4ee965-251a-4733-8f56-9d4a3afa1c35
+
+	column OrdreDInterventionV2_ID
+		dataType: string
+		isHidden
+		lineageTag: ae79ad18-74d5-4834-993d-b0f755fa065c
+		summarizeBy: none
+		sourceColumn: OrdreDInterventionV2_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Numéro d''OI'
+		dataType: int64
+		formatString: 0
+		displayFolder: DESCRIPTION
+		lineageTag: c91b959b-3a3f-4f52-be88-5b17bbdcb95b
+		summarizeBy: sum
+		sourceColumn: Numéro d'OI
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: d40ee9f5-86ef-4b24-a7b2-e916f1f951c7
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date de création'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: c31275b9-6bd5-4ba9-aa92-6aa49e272b8a
+		summarizeBy: none
+		sourceColumn: Date de création
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date & heure de compte rendu'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: e89a284c-60c3-4912-a423-94ac49753a24
+		summarizeBy: none
+		sourceColumn: Date & heure de compte rendu
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date & heure début (prévisionnel)'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: e64868f1-bfcc-46fe-84ab-524adc261fe7
+		summarizeBy: none
+		sourceColumn: Date & heure début (prévisionnel)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Date & heure fin (prévisionnel)'
+		dataType: dateTime
+		formatString: General Date
+		displayFolder: DATE & TIME
+		lineageTag: 62e5e905-82bb-446a-b1dc-5429f665d028
+		summarizeBy: none
+		sourceColumn: Date & heure fin (prévisionnel)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Statut
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: f574d88a-1244-497a-a985-75549c283902
+		summarizeBy: none
+		sourceColumn: Statut
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Compte rendu'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 017dd07d-c167-4ec0-9865-d75a87f00ac4
+		summarizeBy: none
+		sourceColumn: Compte rendu
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sous Contrat'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: d68c96c0-2bb1-4294-be1b-fc16ff77dd5f
+		summarizeBy: none
+		sourceColumn: Sous Contrat
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Statut signature attachement'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: 3d3eae44-7e7c-4233-9f10-08f023c3d99b
+		summarizeBy: none
+		sourceColumn: Statut signature attachement
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Intervention à réaliser (site/distance)'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: 4421ad70-038f-421b-9c59-ae1adac8eab2
+		summarizeBy: none
+		sourceColumn: Intervention à réaliser (site/distance)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Intervention réaliser (site/distance)'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: e3a1cb76-fa10-490d-93e0-1ab07ef3f75f
+		summarizeBy: none
+		sourceColumn: Intervention réaliser (site/distance)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Statut signature'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: feda5b87-baa8-423c-af56-e55d66b8894a
+		summarizeBy: none
+		sourceColumn: Statut signature
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signataire Technicien'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 2f3b36f3-d0b1-45cb-99e0-7a401911260e
+		summarizeBy: none
+		sourceColumn: Signataire Technicien
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Signataire Client'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: edc8762f-1db1-4b15-883c-0eb8a30b18d4
+		summarizeBy: none
+		sourceColumn: Signataire Client
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Justification "en attente"'
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: bc5ce2d4-d362-48c6-bc54-446b99d42409
+		summarizeBy: none
+		sourceColumn: Justification "en attente"
+
+		annotation SummarizationSetBy = Automatic
+
+	column '1.1 Encombrement du local'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 1041473d-6381-4f96-bd25-ab592d13dd63
+		summarizeBy: none
+		sourceColumn: 1.1 Encombrement du local
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 1.1'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: fe74e889-ca2c-4c7e-baa9-b23da26e6ff0
+		summarizeBy: none
+		sourceColumn: Observation 1.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column '1.2 Climatisation du local'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 77b12ba6-4724-4090-8dca-c94d457f2796
+		summarizeBy: none
+		sourceColumn: 1.2 Climatisation du local
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 1.2'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 74d232c7-fcba-474c-b765-ab3dd6856ba0
+		summarizeBy: none
+		sourceColumn: Observation 1.2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Operation de contrôles réalisées (site / distance)'
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: 0a22dae2-a32c-4c3a-bc30-37eecdb2d64a
+		summarizeBy: none
+		sourceColumn: Operation de contrôles réalisées (site / distance)
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.1 Connexion machine / n° modem'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 9f04c6d9-d715-4fad-a21f-597993fde13b
+		summarizeBy: none
+		sourceColumn: 2.1 Connexion machine / n° modem
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.1'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 99a46e77-41ed-4970-813f-4d88a14cf15f
+		summarizeBy: none
+		sourceColumn: Observation 2.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.2 Version de la machine et patchs installes'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 4b6c5c45-12ad-452e-9568-6c8b75d69d32
+		summarizeBy: none
+		sourceColumn: 2.2 Version de la machine et patchs installes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.2'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 5d8f3d52-a1dd-477d-8762-a49f654952af
+		summarizeBy: none
+		sourceColumn: Observation 2.2
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.3 Sauvegarde de la base de données'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 683d104c-0acd-4fa3-91c4-3a2ec794db7a
+		summarizeBy: none
+		sourceColumn: 2.3 Sauvegarde de la base de données
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.3'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 6eba155c-d5b8-4eb5-87fd-820ee9ea9cda
+		summarizeBy: none
+		sourceColumn: Observation 2.3
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.4 Lecture historique alarmes et incidents'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 34e863cc-2845-4a75-b6ea-a50b49e62533
+		summarizeBy: none
+		sourceColumn: 2.4 Lecture historique alarmes et incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.4'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 9084e493-ba35-45cb-90e3-0d1ecd232852
+		summarizeBy: none
+		sourceColumn: Observation 2.4
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.5 Poste Operateur (standard ou POPC)'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 70ddc702-11f7-42b1-ad26-5a327074c01a
+		summarizeBy: none
+		sourceColumn: 2.5 Poste Operateur (standard ou POPC)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.5'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: e72d9ce2-f589-4a4d-96a9-8b133937bba0
+		summarizeBy: none
+		sourceColumn: Observation 2.5
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.6 Heure'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 747436c4-63f1-4c14-a019-efba8e320e59
+		summarizeBy: none
+		sourceColumn: 2.6 Heure
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.6'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 21dc092c-41d4-4598-ab7d-511152d733ec
+		summarizeBy: none
+		sourceColumn: Observation 2.6
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.7 Guides parlants et musique d''attente'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 8151321a-0c4b-4e22-a00c-0ce6ffa51a6c
+		summarizeBy: none
+		sourceColumn: 2.7 Guides parlants et musique d'attente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.7'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: ce50e0fe-6134-4123-ac16-7a71c77ac9d5
+		summarizeBy: none
+		sourceColumn: Observation 2.7
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.8 Test de remontées d''Alarmes et incidents'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 7ab06220-28cc-4b1d-ba09-0e12f8eb0625
+		summarizeBy: none
+		sourceColumn: 2.8 Test de remontées d'Alarmes et incidents
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.8'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 06dedf98-55fb-4ac5-a003-5a7878b30955
+		summarizeBy: none
+		sourceColumn: Observation 2.8
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.9 Liens Operateurs (OPT)'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 5ddc763d-0d3f-4edb-8fab-913f8d371f5c
+		summarizeBy: none
+		sourceColumn: 2.9 Liens Operateurs (OPT)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.9'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 6fa408b6-f1e0-4761-b12c-430617b5a2b3
+		summarizeBy: none
+		sourceColumn: Observation 2.9
+
+		annotation SummarizationSetBy = Automatic
+
+	column '2.10 Lien IP'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 1d18e5b9-2b4f-4005-b0d3-341ae36f769a
+		summarizeBy: none
+		sourceColumn: 2.10 Lien IP
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 2.10'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: b09f15ff-93f6-4999-abab-2b11ca08a0d2
+		summarizeBy: none
+		sourceColumn: Observation 2.10
+
+		annotation SummarizationSetBy = Automatic
+
+	column '3.1 Controle de l''environnement'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: b7048d30-f354-4f5f-8ead-6e77051adb2c
+		summarizeBy: none
+		sourceColumn: 3.1 Controle de l'environnement
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 3.1'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: de34f45b-0a33-4e0f-9f1d-621be4412f26
+		summarizeBy: none
+		sourceColumn: Observation 3.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column '3.2 Controle de meaanisme des connexions'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 84558d86-9729-4b89-b34c-2f03efcce65f
+		summarizeBy: none
+		sourceColumn: 3.2 Controle de meaanisme des connexions
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observations 3.2'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 9c7668e0-c8cf-460b-86cc-11ec57ed840d
+		summarizeBy: none
+		sourceColumn: Observations 3.2
+
+		annotation SummarizationSetBy = Automatic
+
+	column '3.3 Controle visuel des batteries'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 08ff3305-a0c9-4689-a36f-e172238c4e5c
+		summarizeBy: none
+		sourceColumn: 3.3 Controle visuel des batteries
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 3.3'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: fd8011a5-270f-4dab-a3ac-7218724f8f05
+		summarizeBy: none
+		sourceColumn: Observation 3.3
+
+		annotation SummarizationSetBy = Automatic
+
+	column '5 Minutes'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 75c6ead5-9896-4b08-b13f-41b39cc2fe24
+		summarizeBy: none
+		sourceColumn: 5 Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column '15 Minutes'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 7d368370-dc64-4303-936f-4def7af35c4a
+		summarizeBy: none
+		sourceColumn: 15 Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column '30 Minutes'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 6d9efaea-625e-46c8-81f8-6b1c86e4f96c
+		summarizeBy: none
+		sourceColumn: 30 Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column '45 Minutes'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: d42437ad-c58d-4116-ae1d-fdd546ec82d3
+		summarizeBy: none
+		sourceColumn: 45 Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column '60 Minutes'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: bc24879a-0dd3-4022-b224-9ba0493bb448
+		summarizeBy: none
+		sourceColumn: 60 Minutes
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 3.4'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 9845f2ac-afa9-47c9-975e-0ed70085c675
+		summarizeBy: none
+		sourceColumn: Observation 3.4
+
+		annotation SummarizationSetBy = Automatic
+
+	column '4.1 Messagerie vocale'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: dea790dc-79ca-4dd7-bd7d-5b47d5cf7534
+		summarizeBy: none
+		sourceColumn: 4.1 Messagerie vocale
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 4.1'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: ebbdffac-7755-4541-bce9-61ad781a09d2
+		summarizeBy: none
+		sourceColumn: Observation 4.1
+
+		annotation SummarizationSetBy = Automatic
+
+	column '4.2 taxation'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 0a8727ac-2868-472d-a2f1-52c3325b4983
+		summarizeBy: none
+		sourceColumn: 4.2 taxation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 4.2'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: d329c541-12a2-460f-89ff-9bcaf76723aa
+		summarizeBy: none
+		sourceColumn: Observation 4.2
+
+		annotation SummarizationSetBy = Automatic
+
+	column '4.3 Centre de gestion'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 957661ce-d9f0-476c-8d42-fe3d1a08e5ee
+		summarizeBy: none
+		sourceColumn: 4.3 Centre de gestion
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 4.3'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: c1ce8a06-0df0-492f-ad30-d0b1f770cfb8
+		summarizeBy: none
+		sourceColumn: Observation 4.3
+
+		annotation SummarizationSetBy = Automatic
+
+	column '4.4 Serveur ACD'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 92bd652a-54f5-49ef-9bfa-2493746a457f
+		summarizeBy: none
+		sourceColumn: 4.4 Serveur ACD
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 4.4'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: f6ddeb01-75da-400e-a0ce-81cd177739a6
+		summarizeBy: none
+		sourceColumn: Observation 4.4
+
+		annotation SummarizationSetBy = Automatic
+
+	column '4.5 Passerelles'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: a7c801f6-c7cf-4f48-b15c-441e7800a18a
+		summarizeBy: none
+		sourceColumn: 4.5 Passerelles
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 4.5'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 76d6009c-03dc-43e0-875a-2c1f5a3c0ae6
+		summarizeBy: none
+		sourceColumn: Observation 4.5
+
+		annotation SummarizationSetBy = Automatic
+
+	column '4.6 Securisation'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: 26ad12d3-38d9-4d3c-bd25-9a8e24488b58
+		summarizeBy: none
+		sourceColumn: 4.6 Securisation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observation 4.6'
+		dataType: string
+		displayFolder: MAINTENANCE
+		lineageTag: b891c4fa-61ba-4ad9-91bf-5b5767d65d1e
+		summarizeBy: none
+		sourceColumn: Observation 4.6
+
+		annotation SummarizationSetBy = Automatic
+
+	column Facturation
+		dataType: string
+		displayFolder: STATUT
+		lineageTag: 709f3ef6-07ca-48dc-8507-7b8b9b0feb41
+		summarizeBy: none
+		sourceColumn: Facturation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nbr d''articles'
+		dataType: int64
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: a149f00d-8d82-4063-a789-3dffeade4159
+		summarizeBy: sum
+		sourceColumn: Nbr d'articles
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TOTAL heures réalisées'
+		dataType: int64
+		formatString: 0
+		displayFolder: INVOICE
+		lineageTag: 0e27445a-1292-4290-a0bf-b4d20c6c7e98
+		summarizeBy: sum
+		sourceColumn: TOTAL heures réalisées
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TOTAL Prestation HT'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: fbc20281-04ec-4872-a8e2-84770fbbadce
+		summarizeBy: sum
+		sourceColumn: TOTAL Prestation HT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'TOTAL Materiels HT'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: ba3b5057-f6ca-4b85-8064-519f04adf3e0
+		summarizeBy: sum
+		sourceColumn: TOTAL Materiels HT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'TOTAL HT'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: 5c727002-81fa-43d3-b091-a00e3be1605d
+		summarizeBy: sum
+		sourceColumn: TOTAL HT
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'TOTAL TGC'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: 19d1edf9-7e2d-4cf0-946b-8d94e5aed818
+		summarizeBy: sum
+		sourceColumn: TOTAL TGC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'TOTAL TTC'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		displayFolder: INVOICE
+		lineageTag: a20f345a-7005-41cf-be7d-3fd8b20e6b08
+		summarizeBy: sum
+		sourceColumn: TOTAL TTC
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'REL_OI_Tickets_SRC.DemandeDAssistanceV2_ID'
+		dataType: string
+		isHidden
+		lineageTag: 7a397ee5-d29c-48c0-b604-b3fed07a73b1
+		summarizeBy: none
+		sourceColumn: REL_OI_Tickets_SRC.DemandeDAssistanceV2_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Commentaires
+		dataType: string
+		displayFolder: DESCRIPTION
+		lineageTag: 0fef4315-984e-40f9-b8f4-5d90f66a78a8
+		summarizeBy: none
+		sourceColumn: Commentaires
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'FACT_Ordres_d''Interventions' = m
+		mode: import
+		queryGroup: 'API Safeplace\03_Model\FACT'
+		source =
+				let
+				    Source = #"TAB_Ordres_d'Interventions_TSF"
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
