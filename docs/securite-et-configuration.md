@@ -1,23 +1,23 @@
-# Sécurité et configuration
+# Security and configuration
 
-## Paramètres de connexion à renseigner
-Les requêtes interrogent l'API Safeplace avec une URL de base (`url`) et, pour chaque source, trois paramètres :
+## Connection parameters to fill in
+The queries call the Safeplace API with a base URL (`url`) and, for each source, three parameters:
 
-| Source | Chemin API | Identifiant | Secret |
+| Source | API path | Identifier | Secret |
 |---|---|---|---|
-| Pointages | `key_ptg` | `id_ptg` | `id_ptg_s` |
-| Tickets (et tables liées) | `key_tic` | `id_tic` | `id_tic_s` |
-| Ordres d'interventions | `key_OI` | `id_OI` | `id_OI_s` |
-| Contrats | `key_ctr` | `id_ctr` | `id_ctr_s` |
-| Contrats TechPack | `key_ctp` | `id_ctp` | `id_ctp_s` |
+| Time entries (*Pointages*) | `key_ptg` | `id_ptg` | `id_ptg_s` |
+| Tickets (and related tables) | `key_tic` | `id_tic` | `id_tic_s` |
+| Intervention orders | `key_OI` | `id_OI` | `id_OI_s` |
+| Contracts | `key_ctr` | `id_ctr` | `id_ctr_s` |
+| TechPack contracts | `key_ctp` | `id_ctp` | `id_ctp_s` |
 
-Le dépôt contient des valeurs fictives `<A_RENSEIGNER_...>` ; à remplacer dans Power BI Desktop (*Transformer les données › Gérer les paramètres*). L'API reçoit `client_id` et `client_secret` dans les **en-têtes HTTP**.
+The repository contains dummy `<A_RENSEIGNER_...>` ("to be filled in") values; replace them in Power BI Desktop (*Transform data › Manage parameters*). The API receives `client_id` and `client_secret` in the **HTTP headers**.
 
-## Ce qui a été retiré avant publication
-- Les identifiants `client_id` / `client_secret` et les chemins d'accès de l'API, qui étaient écrits en clair dans `expressions.tmdl`.
-- Le cache de données `.pbi/cache.abf` (données importées) et les réglages locaux `.pbi/localSettings.json`.
+## What was removed before publication
+- The `client_id` / `client_secret` credentials and the API access paths, which were written in clear text in `expressions.tmdl`.
+- The data cache `.pbi/cache.abf` (imported data) and the local settings `.pbi/localSettings.json`.
 
-## Recommandations
-- **Révoquer / régénérer** les identifiants API d'origine : ils ont circulé en clair (fichier de travail, échanges) et ne doivent plus être considérés comme secrets.
-- Ne jamais committer de valeurs réelles : conserver le `.gitignore` fourni et, à terme, stocker les secrets hors du modèle (Power BI Service, Azure Key Vault, passerelle de données).
-- Les données sont issues de systèmes internes (tickets clients, pointages nominatifs, taux horaires) : ne pas publier de capture ou d'export du rapport sans anonymisation.
+## Recommendations
+- **Revoke / regenerate** the original API credentials: they circulated in clear text (working file, exchanges) and must no longer be considered secret.
+- Never commit real values: keep the provided `.gitignore` and, in the long run, store secrets outside the model (Power BI Service, Azure Key Vault, data gateway).
+- The data comes from internal systems (client tickets, named time entries, hourly rates): do not publish screenshots or exports of the report without anonymisation.

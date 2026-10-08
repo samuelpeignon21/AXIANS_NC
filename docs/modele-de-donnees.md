@@ -1,32 +1,32 @@
-# Modèle de données
+# Data model
 
-Modèle sémantique en **mode Import**, culture `fr-FR`, schéma en étoile centré sur les tickets et les pointages.
+Semantic model in **Import mode**, `fr-FR` culture, star schema centred on tickets and time entries.
 
 ## Tables
 
-### Faits
-| Table | Contenu | Grain |
+### Facts
+| Table | Content | Grain |
 |---|---|---|
-| `FACT_Tickets` | Demandes d'assistance : numéro, objet, dates (création, prise en compte, résolution, facturation), heures facturables, totaux HT / TGC / TTC, clés vers entreprise, site, affaire, contrat | 1 ligne = 1 ticket |
-| `FACT_Ordres_d'Interventions` | Ordres d'intervention (OI) : planning prévisionnel, compte rendu, signatures, **check-lists de contrôle** (sections 1 à 4 : local, machine, environnement, services), heures réalisées, totaux de facturation | 1 ligne = 1 OI |
-| `FACT_Pointage` | Feuilles de temps : date, heures début/fin, heures travaillées, déplacement, validation, envoi vers Codex, taux horaire, prix HT | 1 ligne = 1 pointage |
+| `FACT_Tickets` | Support requests: number, subject, dates (creation, acknowledgement, resolution, invoicing), billable hours, totals excl. tax / TGC / incl. tax, keys to company, site, project, contract | 1 row = 1 ticket |
+| `FACT_Ordres_d'Interventions` | Intervention orders (OI): planned schedule, report, signatures, **control checklists** (sections 1 to 4: room, machine, environment, services), hours performed, invoicing totals | 1 row = 1 OI |
+| `FACT_Pointage` | Timesheets: date, start/end times, hours worked, travel, validation, sent to Codex, hourly rate, price excl. tax | 1 row = 1 time entry |
 
 ### Dimensions
-| Table | Contenu |
+| Table | Content |
 |---|---|
-| `DIM_Tickets` | Attributs des tickets : statut, catégorie, type, priorité, manuel/automatique, indicateurs `QH` (quota d'heures) et `TP` (TechPack) |
-| `DIM_Entreprises` | Clients : nom, numéro client, indicateur TechPack |
-| `DIM_Sites` | Sites clients : nom, adresse, contact |
-| `DIM_Contrat` | Contrats : référence, dates (effet, préavis, fin), durée, statut, **quota d'heures / an** |
-| `DIM_TechPack` | Forfaits TechPack : nombre, paramètre (heures), dates de validité, **heures totales** |
-| `DIM_Utilisateurs` | Techniciens : nom, matricule Codex, taux horaire, astreinte, licence |
-| `DIM_Affaires_Codex` | Affaires issues de Codex (ERP) : numéro d'affaire, type de projet, dates, unité analytique |
+| `DIM_Tickets` | Ticket attributes: status, category, type, priority, manual/automatic, `QH` (hours quota) and `TP` (TechPack) flags |
+| `DIM_Entreprises` | Clients: name, client number, TechPack flag |
+| `DIM_Sites` | Client sites: name, address, contact |
+| `DIM_Contrat` | Contracts: reference, dates (effective, notice, end), duration, status, **annual hours quota** |
+| `DIM_TechPack` | TechPack bundles: count, parameter (hours), validity dates, **total hours** |
+| `DIM_Utilisateurs` | Technicians: name, Codex employee number, hourly rate, on-call, licence |
+| `DIM_Affaires_Codex` | Projects from Codex (ERP): project number, project type, dates, analytical unit |
 
-### Autres
-- `TAB_Date` — calendrier DAX (année, mois, trimestre, semaine ISO, libellés…), trié par numéro de mois.
-- `Mesures` — table vide qui héberge les mesures DAX, rangées par dossiers d'affichage (*POINTAGES*, *QUOTA D'HEURE & TP*).
+### Other
+- `TAB_Date` — DAX calendar (year, month, quarter, ISO week, labels…), sorted by month number.
+- `Mesures` — empty table hosting the DAX measures, organised in display folders (*POINTAGES*, *QUOTA D'HEURE & TP*).
 
-## Relations
+## Relationships
 
 ```mermaid
 erDiagram
@@ -35,38 +35,38 @@ erDiagram
     DIM_Affaires_Codex ||--o{ FACT_Tickets : "TEEPEE_AffairesCodex_ID"
     DIM_Contrat ||--o{ FACT_Tickets : "Contrats_ID"
     DIM_TechPack ||--o{ FACT_Tickets : "Entreprise_ID"
-    TAB_Date ||--o{ FACT_Tickets : "Date de création (copie)"
-    DIM_Tickets ||--|| FACT_Tickets : "DemandeDAssistanceV2_ID (bidirectionnel)"
+    TAB_Date ||--o{ FACT_Tickets : "Date de création (copy)"
+    DIM_Tickets ||--|| FACT_Tickets : "DemandeDAssistanceV2_ID (bidirectional)"
     DIM_Tickets ||--o{ FACT_Ordres_dInterventions : "DemandeDAssistanceV2_ID"
     DIM_Affaires_Codex ||--o{ FACT_Pointage : "TEEPEE_AffairesCodex_ID"
     DIM_Utilisateurs ||--o{ FACT_Pointage : "USER_ID"
     TAB_Date ||--o{ FACT_Pointage : "Date Pointage"
 ```
 
-Notes :
-- `DIM_Tickets ↔ FACT_Tickets` est une relation 1-1 **bidirectionnelle** : `DIM_Tickets` porte les attributs descriptifs, `FACT_Tickets` les dates et montants.
-- Les ordres d'intervention se rattachent aux tickets via `DIM_Tickets`, ce qui permet de filtrer les heures d'intervention par statut ou catégorie de ticket.
-- `DIM_TechPack` est reliée à `FACT_Tickets` via l'**entreprise** (un client, ses forfaits TechPack) ; la période de validité est appliquée dans les mesures DAX, pas dans la relation.
-- La disposition visuelle du modèle est dans `powerbi/Teepee_Model_2.1.SemanticModel/diagramLayout.json`.
+Notes:
+- `DIM_Tickets ↔ FACT_Tickets` is a **bidirectional** 1-to-1 relationship: `DIM_Tickets` carries the descriptive attributes, `FACT_Tickets` the dates and amounts.
+- Intervention orders attach to tickets through `DIM_Tickets`, which makes it possible to filter intervention hours by ticket status or category.
+- `DIM_TechPack` is linked to `FACT_Tickets` through the **company** (one client, its TechPacks); the validity period is applied in the DAX measures, not in the relationship.
+- The visual layout of the model is in `powerbi/Teepee_Model_2.1.SemanticModel/diagramLayout.json`.
 
-## Chaîne Power Query
+## Power Query chain
 
-Les requêtes sont organisées en groupes sous **API Safeplace** :
+Queries are organised in groups under **API Safeplace**:
 
-| Groupe | Rôle | Exemples |
+| Group | Role | Examples |
 |---|---|---|
-| `00_Paramètres` | Adresse de l'API et identifiants (par source) | `url`, `key_*`, `id_*`, `id_*_s` |
-| `01_Sources_API` | Une requête par table exposée par l'API (`SRC_Pointages`, `SRC_Tickets`, `SRC_OI`, `SRC_Contrats`, `SRC_Contrats_TP`) | `TAB_Pointage`, `TAB_Demande_d'assistance_(tickets)`, `TAB_Ordres_d'Interventions`, `TAB_Contrats`… |
-| `02_Transformées` | Nettoyage et enrichissement (suffixe `_TSF`) | `TAB_Demande_d'assistance_(tickets)_TSF`, `TAB_Ordres_d'Interventions_TSF`, `TAB_Contrats_TSF` |
-| `03_Model` (`FACT`, `DIM`, `RELATIONS`) | Tables finales chargées dans le modèle + tables de liaison `REL_*` | `FACT_Tickets`, `DIM_Contrat`, `REL_Contrat_Tickets`… |
+| `00_Paramètres` | API address and credentials (per source) | `url`, `key_*`, `id_*`, `id_*_s` |
+| `01_Sources_API` | One query per table exposed by the API (`SRC_Pointages`, `SRC_Tickets`, `SRC_OI`, `SRC_Contrats`, `SRC_Contrats_TP`) | `TAB_Pointage`, `TAB_Demande_d'assistance_(tickets)`, `TAB_Ordres_d'Interventions`, `TAB_Contrats`… |
+| `02_Transformées` | Cleaning and enrichment (`_TSF` suffix) | `TAB_Demande_d'assistance_(tickets)_TSF`, `TAB_Ordres_d'Interventions_TSF`, `TAB_Contrats_TSF` |
+| `03_Model` (`FACT`, `DIM`, `RELATIONS`) | Final tables loaded into the model + `REL_*` link tables | `FACT_Tickets`, `DIM_Contrat`, `REL_Contrat_Tickets`… |
 
-Principales transformations (requête `TAB_Demande_d'assistance_(tickets)_TSF`) :
-- renommage des champs techniques de l'API en libellés métier (`NumeRoDeTicket` → `Numéro de ticket`…) ;
-- traduction des codes : *manuel/automatique* (0/1), **statuts** (`EnCours` → *Prise en compte*, `AFacture` → *A Facturé*…), **catégories** (BUILD, RUN, INFOGERANCE, BUSINESS, SERVICES, CONGES / FERIE / MALADIE, NOUVELLE DEMANDE), **priorités** (Majeur / Mineur / Non urgent) ;
-- exclusion des tickets dont le mode manuel/automatique est vide ;
-- jointures avec les tables `REL_*_Tickets` (entreprise, site, priorité, affaire, contrat) pour obtenir les clés étrangères ;
-- duplication de la date de création en type *date* pour la relation avec `TAB_Date`.
+Main transformations (query `TAB_Demande_d'assistance_(tickets)_TSF`):
+- renaming of the API's technical fields to business labels (`NumeRoDeTicket` → `Numéro de ticket`…);
+- translation of codes: *manual/automatic* (0/1), **statuses** (`EnCours` → *Prise en compte*, `AFacture` → *A Facturé*…), **categories** (BUILD, RUN, INFOGERANCE, BUSINESS, SERVICES, CONGES / FERIE / MALADIE, NOUVELLE DEMANDE), **priorities** (Majeur / Mineur / Non urgent);
+- exclusion of tickets whose manual/automatic mode is empty;
+- joins with the `REL_*_Tickets` tables (company, site, priority, project, contract) to obtain the foreign keys;
+- duplication of the creation date as a *date* type for the relationship with `TAB_Date`.
 
-`FACT_Tickets` et `DIM_Tickets` sont deux projections de la même requête `_TSF` (colonnes différentes supprimées).
+`FACT_Tickets` and `DIM_Tickets` are two projections of the same `_TSF` query (different columns removed).
 
-Une requête de diagnostic `Erreurs dans DIM_Utilisateurs` (groupe *Erreurs des requêtes*) liste les incohérences de types détectées lors d'un chargement ; elle n'est pas chargée dans le modèle.
+A diagnostic query `Erreurs dans DIM_Utilisateurs` (group *Erreurs des requêtes*) lists the type inconsistencies detected during a load; it is not loaded into the model.

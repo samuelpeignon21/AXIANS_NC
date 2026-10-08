@@ -1,24 +1,24 @@
-# Description du rapport
+# Report description
 
-Format 16:9 (1280 × 720), thème de base Power BI **CY26SU04**, logo Axians intégré. Page d'accueil : *Tickets*. Deux signets (*Signet Mois*, *Signet Semaine*) permettent de basculer entre les vues mensuelle et hebdomadaire des feuilles de temps.
+16:9 format (1280 × 720), Power BI base theme **CY26SU04**, embedded Axians logo. Home page: *Tickets*. Two bookmarks (*Signet Mois*, *Signet Semaine*) switch between the monthly and weekly timesheet views.
 
-## Pages visibles
-| Page | Contenu |
+## Visible pages
+| Page | Content |
 |---|---|
-| **Tickets** | Segments (année, mois, catégorie, statut, entreprise, site, technicien, n° de ticket) ; carte du nombre de tickets ; anneaux *par statut* et *par priorité* ; courbe *tickets / jour* ; colonnes *répartition par client* |
-| **Suivi du quota d'heures – Générale** | Segment année ; carte *contrats en vigilance ou critiques* ; histogramme *heures consommées par entreprise* ; tableau des contrats (quota, solde, % restant, statut) |
-| **Suivi du TechPack – Générale** | Segment année ; carte solde / consommé ; histogramme *heures consommées par entreprise* ; tableau des TechPack (période, heures, solde, statut) |
-| **Feuilles de temps** | KPI *suivi des validations* par semaine, % validé, tableau des pointages (avec lien « Ouvrir » vers la fiche), matrice affaire × technicien |
-| **Suivi Interventions Planifiées** | Diagramme de Gantt (visuel personnalisé **Deneb**) des pointages/interventions par technicien, filtré par date |
+| **Tickets** | Slicers (year, month, category, status, company, site, technician, ticket no.); ticket count card; donut charts *by status* and *by priority*; *tickets / day* line chart; *breakdown by client* columns |
+| **Suivi du quota d'heures – Générale** (hours quota tracking – overview) | Year slicer; *contracts on watch or critical* card; *hours consumed per company* column chart; contract table (quota, balance, % remaining, status) |
+| **Suivi du TechPack – Générale** (TechPack tracking – overview) | Year slicer; balance / consumed card; *hours consumed per company* column chart; TechPack table (period, hours, balance, status) |
+| **Feuilles de temps** (timesheets) | *Validation tracking* KPI per week, % validated, time entry table (with an "Open" link to the record), project × technician matrix |
+| **Suivi Interventions Planifiées** (planned interventions tracking) | Gantt chart (custom **Deneb** visual) of time entries/interventions per technician, filtered by date |
 
-## Pages de détail (masquées, accessibles par bouton)
-| Page | Rôle |
+## Detail pages (hidden, reachable via a button)
+| Page | Role |
 |---|---|
-| **Détails Tickets** | Liste des tickets d'un client avec compte rendu et heures réalisées |
-| **Détails quota d'heures / Client** | Jauge de consommation du quota, % restant, courbe cumulée *année en cours vs N-1*, détail des OI |
-| **Détails Ticket TechPack / Client** | Détail des OI pour un client TechPack |
-| **Feuilles de temps (visuel mois)** | Variante mensuelle de la page *Feuilles de temps* |
-| **Info-Bulle Entreprise** | Page infobulle (400 × 500) : tickets d'une entreprise au survol |
+| **Détails Tickets** | List of a client's tickets with report and hours performed |
+| **Détails quota d'heures / Client** | Quota consumption gauge, % remaining, cumulative curve *current year vs previous year*, OI details |
+| **Détails Ticket TechPack / Client** | OI details for a TechPack client |
+| **Feuilles de temps (visuel mois)** | Monthly variant of the *Feuilles de temps* page |
+| **Info-Bulle Entreprise** | Tooltip page (400 × 500): a company's tickets on hover |
 
-## Visuels personnalisés
-- **Deneb** (Vega-Lite) — utilisé pour le Gantt des interventions planifiées.
+## Custom visuals
+- **Deneb** (Vega-Lite) — used for the planned interventions Gantt chart.
